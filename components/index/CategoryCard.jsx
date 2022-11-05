@@ -3,7 +3,7 @@ import React from "react";
 
 const CategoryCard = ({ data }) => {
   return (
-    <Link href="/">
+    <Link href={`/course/sector/${data.sector_uuid}`}>
       <div className="md:w-72 my-2 border rounded-3xl md:rounded border-blue-300 md:border-gray-300 overflow-hidden mx-2 cursor-pointer">
         <div className="hidden md:block w-full h-72">
           <img
