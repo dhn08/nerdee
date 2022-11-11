@@ -1,13 +1,14 @@
 import Link from "next/link";
 import React from "react";
+import { urlFor } from "../../utils/client";
 
 const CourseCard = ({ data }) => {
   return (
-    <Link href="/">
+    <Link href={`/course/detail/${data._id}`}>
       <div className="w-60  md:w-56 cursor-pointer m-2 flex md:block">
         <div className="w-4/12 md:w-full h-16 overflow-hidden md:h-40 border rounded-md">
           <img
-            src={data.image_url}
+            src={urlFor(data.image)}
             className="w-full h-full"
             alt="course_card_img"
           />
@@ -23,9 +24,9 @@ const CourseCard = ({ data }) => {
           <h5 className="text-xs ">
             {/* OtchereDev */}
             By{" "}
-            {data.author.name.length > 10
-              ? data.author.name.slice(0, 9) + "..."
-              : data.author.name}
+            {data.authorlength > 10
+              ? data.author.slice(0, 9) + "..."
+              : data.author}
           </h5>
           {/* <h3 className="text-xs text-yellow-500 my-1">
             <span className="font-semibold mr-3">rating: {data.rating}</span> (

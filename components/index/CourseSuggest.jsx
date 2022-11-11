@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
-
 import { CourseSuggestChangeBtn } from "./CourseSuggestChangeBtn";
 const CourseSuggest = ({ sectors, courses }) => {
   const [suggest, setSuggest] = useState(sectors[0].sector_name);

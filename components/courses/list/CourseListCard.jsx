@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import { urlFor } from "../../../utils/client";
 const CourseListCard = ({ data }) => {
   return (
-    <Link href="/">
+    <Link href={`/course/detail/${data._id}`}>
       <div className="w-full flex flex-col md:flex-row cursor-pointer  justify-between border-b pb-3 mt-2">
         <div className="overflow-hidden w-9/12 md:w-3/12 md:mr-2 lg:mr-0 lg:w-2/12 h-36 md:h-40 border rounded-md ">
           <img
-            src={data.image_url}
+            src={urlFor(data.image)}
             className="w-full h-full"
             alt="course_card_img"
           />
