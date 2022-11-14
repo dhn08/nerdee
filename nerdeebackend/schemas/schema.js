@@ -5,6 +5,8 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 import courses from "./courses";
 import sector from "./sector";
+import tempteacher from "./tempteacher";
+import user from "./user";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -14,6 +16,8 @@ export default createSchema({
   types: schemaTypes.concat([
     courses,
     sector,
+    tempteacher,
+    user,
     /* Your types here! */
   ]),
 });

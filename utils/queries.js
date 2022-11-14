@@ -86,3 +86,29 @@ export const sectorDetailQuery = (sectorId) => {
       }`;
   return query;
 };
+export const tempTeacherDetailQuery = () => {
+  const query = `*[_type == "tempteacher"]{
+    _id,
+    email,
+    name,
+    password
+  }`;
+  return query;
+};
+
+export const searchCourseQuery = (searchTerm) => {
+  const query = `*[_type == "course" && title match '${searchTerm}*' || description match '${searchTerm}*']{
+    _id,
+    author,
+    description,
+    price,
+    title,
+    image{
+    asset->{
+    _id,
+    url
+  }
+  }
+  } `;
+  return query;
+};

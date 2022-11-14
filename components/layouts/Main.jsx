@@ -7,7 +7,18 @@ const Main = ({ children }) => {
   return (
     <div className="font-normal">
       <Navbar />
-      <ToastContainer autoClose={20000} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {children}
       <Footer />
     </div>

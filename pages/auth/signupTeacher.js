@@ -2,13 +2,32 @@ import React, { useState } from "react";
 import FormInput from "../../components/auth/FormInput";
 import Main from "../../components/layouts/Main";
 import { BsFillPersonFill } from "react-icons/bs";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdHelpOutline } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import axios from "axios";
 const signupTeacher = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const doc = {
+      _type: "tempteacher",
+      name: name,
+      email: email,
+      password: password,
+    };
+    const result = await axios.post(
+      "http://localhost:3000/api/teacherregister",
+      doc
+    );
+    toast(`${result.data}`);
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
   return (
     <Main>
       <section className="flex justify-center pt-20 min-h-screen">
@@ -17,7 +36,7 @@ const signupTeacher = () => {
             Sign Up and Start Teaching!
           </h2>
 
-          <form className="w-full py-4">
+          <form onSubmit={handleSignUp} className="w-full py-4">
             <FormInput
               inputVal={name}
               setInput={setName}
@@ -47,7 +66,10 @@ const signupTeacher = () => {
               disabled={authReady}
               action={!authReady ? "Sign Up" : "Please wait ..."}
             /> */}
-            <button className="block w-full bg-red-500 my-4 py-3 text-gray-50 rounded font-semibold">
+            <button
+              type="submit"
+              className="block w-full bg-red-500 my-4 py-3 text-gray-50 rounded font-semibold"
+            >
               Sign up
             </button>
 

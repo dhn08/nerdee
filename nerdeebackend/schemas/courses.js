@@ -4,11 +4,6 @@ export default {
   type: "document",
   fields: [
     {
-      title: "course_uuid",
-      name: "course_uuid",
-      type: "number",
-    },
-    {
       title: "title",
       name: "title",
       type: "string",
