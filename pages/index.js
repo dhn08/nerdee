@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import CategoryList from "../components/index/CategoryList";
 import CourseList from "../components/index/CourseList";
@@ -100,6 +101,8 @@ import { allSectorsQuery } from "../utils/queries";
 // ];
 
 export default function Home({ courses, sectors }) {
+  const { data } = useSession();
+  console.log(data);
   return (
     <div>
       <Head>

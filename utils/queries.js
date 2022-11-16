@@ -95,6 +95,16 @@ export const tempTeacherDetailQuery = () => {
   }`;
   return query;
 };
+export const findUserQuery = (emailId) => {
+  const query = `*[_type == "user" && email =='${emailId}'][0]{
+    _id,
+    email,
+    name,
+    password,
+    role
+  }`;
+  return query;
+};
 
 export const searchCourseQuery = (searchTerm) => {
   const query = `*[_type == "course" && title match '${searchTerm}*' || description match '${searchTerm}*']{

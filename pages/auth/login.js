@@ -5,9 +5,29 @@ import FormInput from "../../components/auth/FormInput";
 import Link from "next/link";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 const login = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const status = await signIn("credentials", {
+      redirect: false,
+      email: email,
+      password: password,
+      callbackUrl: "/",
+    });
+    console.log(status);
+    if (!status.ok) {
+      toast(status.error);
+    }
+    // if (status.ok) {
+    //   router.push(status.url);
+    // }
+  };
   return (
     <Main>
       <section className="flex justify-center pt-20 min-h-screen">
@@ -16,7 +36,7 @@ const login = () => {
             Log In and Start Learning!
           </h2>
 
-          <form action="" className="w-full py-4">
+          <form onSubmit={handleLogin} className="w-full py-4">
             <FormInput
               inputVal={email}
               setInput={setEmail}
@@ -38,7 +58,10 @@ const login = () => {
               disabled={authReady}
               action={!authReady ? "Log In" : "Please wait..."}
             /> */}
-            <button className="block w-full bg-red-500 my-4 py-3 text-gray-50 rounded font-semibold">
+            <button
+              type="submit"
+              className="block w-full bg-red-500 my-4 py-3 text-gray-50 rounded font-semibold"
+            >
               Log in
             </button>
 

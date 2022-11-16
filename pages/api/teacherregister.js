@@ -1,5 +1,6 @@
 import client from "../../utils/client";
 import nodemailer from "nodemailer";
+import { hash } from "bcryptjs";
 const transporter = nodemailer.createTransport({
   host: process.env.SMPT_HOST,
   port: process.env.SMPT_PORT,
@@ -19,12 +20,18 @@ const mailOptions = {
   from: "btech19eskcs070@skit.ac.in",
   to: "singhdhananjay.2001@gmail.com",
   subject: "New Request for register",
-  text: "Testing",
+  text: "There is new request for teacher registration",
 };
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const document = req.body;
+      const { _type, name, email, password } = req.body;
+      const document = {
+        _type,
+        name,
+        email,
+        password: await hash(password, 12),
+      };
       const query = `*[_type == "tempteacher" && email=='${document.email}'][0]`;
       const check = await client.fetch(query);
       if (check) {

@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSession, signOut } from "next-auth/react";
 const Navbar = () => {
+  const { data: session } = useSession();
+  console.log(session);
   const router = useRouter();
   const [term, setTerm] = useState("");
   const pushRoute = (route) => {
@@ -58,7 +61,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="w-5/12 md:w-4/12 lg:w-2/12 flex justify-between items-center ">
-        <button
+        {/* <button
           onClick={() => pushRoute("/auth/login")}
           className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border border-blue-500 font-semibold text-blue-500  bg-white "
         >
@@ -69,7 +72,39 @@ const Navbar = () => {
           className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-500 font-semibold text-white"
         >
           Sign Up
-        </button>
+        </button> */}
+        {!session?.user ? (
+          <>
+            {" "}
+            <button
+              onClick={() => pushRoute("/auth/login")}
+              className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border border-blue-500 font-semibold text-blue-500  bg-white "
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => pushRoute("/auth/signup")}
+              className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-500 font-semibold text-white"
+            >
+              Sign Up
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <Link href="/">
+              <p className="text-blue-500 cursor-pointer ">
+                {session.user.name}
+              </p>
+            </Link>
+            <button
+              onClick={() => signOut()}
+              className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-red-400 font-semibold text-white"
+            >
+              Logout
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );

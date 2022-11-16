@@ -18,5 +18,10 @@ export default {
       title: "password",
       type: "string",
     },
+    {
+      name: "role",
+      title: "role",
+      type: "string",
+    },
   ],
 };

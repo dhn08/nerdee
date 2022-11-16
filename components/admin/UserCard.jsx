@@ -23,9 +23,12 @@ const UserCard = ({ userData }) => {
     toast(`${result.data}`);
   };
   const handleReject = async () => {
-    await axios.post("http://localhost:3000/api/adminreject", userData);
+    const result = await axios.post(
+      "http://localhost:3000/api/adminreject",
+      userData
+    );
     router.push("/admin");
-    toast("teacher rejected");
+    toast(`${result.data}`);
   };
   return (
     <div className="max-w-md bg-white rounded-lg border border-gray-200 transition duration-300 ease-in-out shadow-md hover:scale-105 cursor-pointer ">
@@ -36,9 +39,9 @@ const UserCard = ({ userData }) => {
         <span className="text-sm text-gray-500 dark:text-gray-400">
           {`email:${userData.email}`}
         </span>
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+        {/* <span className="text-sm text-gray-500 dark:text-gray-400">
           {`password:${userData.password}`}
-        </span>
+        </span> */}
         <div className="flex gap-2 mt-4">
           <button
             onClick={handleApprove}
