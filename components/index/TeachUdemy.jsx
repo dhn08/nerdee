@@ -1,6 +1,11 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const TeachUdemy = () => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/auth/signupTeacher");
+  };
   return (
     <section className="my-5 md:my-10">
       <div className="py-8 md:py-16">
@@ -25,7 +30,10 @@ const TeachUdemy = () => {
                 love.
               </p>
 
-              <button className="py-2 text-sm md:text-base rounded-md px-3 md:px-5 border bg-blue-500 font-semibold text-white">
+              <button
+                onClick={handleClick}
+                className="py-2 text-sm md:text-base rounded-md px-3 md:px-5 border bg-blue-500 font-semibold text-white"
+              >
                 Start teaching today
               </button>
             </div>

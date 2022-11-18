@@ -40,14 +40,14 @@ export default async function handler(req, res) {
         return res.status(201).json("Email already regestered");
       } else {
         await client.delete(document._id);
-        // transporter.sendMail(mailOptions, function (error, info) {
-        //   if (error) {
-        //     console.log(error);
-        //   } else {
-        //     console.log("Email sent: " + info.response);
-        //     // do something useful
-        //   }
-        // });
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+            // do something useful
+          }
+        });
         await client
           .create(newDocument)
           .then(() => res.status(201).json("Teacher Approved"));

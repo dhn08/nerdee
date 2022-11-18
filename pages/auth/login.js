@@ -24,9 +24,9 @@ const login = () => {
     if (!status.ok) {
       toast(status.error);
     }
-    // if (status.ok) {
-    //   router.push(status.url);
-    // }
+    if (status.ok) {
+      router.push(status.url);
+    }
   };
   return (
     <Main>
