@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
+import { useRouter } from "next/router";
 import { CourseSuggestChangeBtn } from "./CourseSuggestChangeBtn";
 const CourseSuggest = ({ sectors, courses }) => {
   const [suggest, setSuggest] = useState(sectors[0].sector_name);
+  const [sectorId, setsectorId] = useState(sectors[0]._id);
   const [suggestedCourse, setSuggestedCourse] = useState(
     sectors.find((sector) => sector.sector_name == suggest).featured_courses
   );
 
+  const router = useRouter();
   useEffect(() => {
     setSuggestedCourse(
       sectors.find((sector) => sector.sector_name == suggest).featured_courses
     );
+    setsectorId(sectors.find((sector) => sector.sector_name == suggest)._id);
   }, [suggest]);
   return (
     <section className="pt-12 md:pt-16 bg-white px-5 md:px-10">
@@ -43,7 +47,10 @@ const CourseSuggest = ({ sectors, courses }) => {
                 computing, and analyze markets. Essentially, data science is the
                 key to getting ahead in a competitive global climate.
               </p>
-              <button className="py-2 rounded-md px-3 text-sm md:text-base md:px-5 border bg-blue-500 font-semibold text-white">
+              <button
+                onClick={() => router.push(`/course/sector/${sectorId}`)}
+                className="py-2 rounded-md px-3 text-sm md:text-base md:px-5 border bg-blue-500 font-semibold text-white"
+              >
                 Explore{" "}
                 {suggest[0].toUpperCase() + suggest.slice(1, suggest.length)}
               </button>

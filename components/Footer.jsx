@@ -51,7 +51,7 @@ const Footer = () => {
             className="wfull"
           />
         </div>
-        <p className="text-gray-400 text-sm">&copy;2021 Nerdee, Inc.</p>
+        <p className="text-gray-400 text-sm">&copy;2022 Nerdee, Inc.</p>
       </div>
     </footer>
   );
