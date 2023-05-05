@@ -7,7 +7,6 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSession, signOut } from "next-auth/react";
 const Navbar = () => {
   const { data: session } = useSession();
-  console.log(session);
   const router = useRouter();
   const [term, setTerm] = useState("");
   const pushRoute = (route) => {
