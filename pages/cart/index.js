@@ -6,10 +6,12 @@ import CartContext from "../../context/CartContext";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import { loadStripe } from "@stripe/stripe-js";
+import { useSession } from "next-auth/react";
+const stripePromise = loadStripe(process.env.stripe_public_key);
 function CartIndex() {
   // const [cartSize,setCartSize]=useState(0)
-
+  const { data } = useSession();
   const { cart, removeCart, clearCart } = useContext(CartContext);
   const [cartTotal, setCartTotal] = useState();
   const [cartReady, setCartReady] = useState(false);
@@ -22,27 +24,36 @@ function CartIndex() {
   const handleCheckout = async () => {
     if (cart.length) {
       setRequestingPayment(true);
-      const res = await fetch(`${NEXT_BACKEND_URI}/payment/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cart }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        toast.success("Redirecting you to payment page...");
-        window.location = data.url;
-      }
-      if (res.status == 403) {
+      if (!data?.user) {
+        console.log("indise if");
         setRequestingPayment(false);
         toast.error("Please login to proceed!!");
-        await router.push("/auth/login");
+        router.push("/auth/login");
       }
-      if (!res.ok) {
-        setRequestingPayment(false);
-        toast.error("Sorry there was an error!!");
-      }
+      const stripe = await stripePromise;
+
+      //   const res = await fetch(`${NEXT_BACKEND_URI}/payment/`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ cart }),
+      //   });
+      //   if (res.ok) {
+      //     const data = await res.json();
+      //     toast.success("Redirecting you to payment page...");
+      //     window.location = data.url;
+      //   }
+      //   if (res.status == 403) {
+      //     setRequestingPayment(false);
+      //     toast.error("Please login to proceed!!");
+      //     await router.push("/auth/login");
+      //   }
+      //   if (!res.ok) {
+      //     setRequestingPayment(false);
+      //     toast.error("Sorry there was an error!!");
+      //   }
+      // }
     }
   };
 

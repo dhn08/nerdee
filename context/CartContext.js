@@ -29,15 +29,19 @@ export const CartContextProvider = ({ children }) => {
     setCart([
       ...initCart.filter((item) => {
         if (data?.user) {
-          return !user.courses.includes(item);
+          return !data.user.courses.includes(item);
         } else {
           return true;
         }
       }),
     ]);
-
     localStorage.setItem("cart", JSON.stringify(cart));
   }, []);
+  useEffect(() => {
+    // Perform localStorage action
+    console.log("Naye use effect se hun", cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addCart = (uuid) => {
     if (!cart.includes(uuid)) {
