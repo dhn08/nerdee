@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../../../context/CartContext";
+import { useRouter } from "next/router";
 
 const Banner = ({ data }) => {
+  const { addCart, cart, removeCart } = useContext(CartContext);
+  const router = useRouter();
+
+  const { course_uuid } = router.query;
+  const handleCarting = () => {
+    if (cart.includes(course_uuid)) {
+      removeCart(course_uuid);
+    } else {
+      addCart(course_uuid);
+    }
+  };
+
   return (
     <section className="text-gray-50 bg-gray-800 py-14 px-8">
       <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold w-11/12 md:w-8/12 mb-2">
@@ -26,7 +40,16 @@ const Banner = ({ data }) => {
         Created by{" "}
         <span className="text-blue-400 underline">{data.author}</span>
       </p>
-      <h2 className="text-xl md:text-2xl font-semibold mb-2">${data.price}</h2>
+      <h2 className="text-xl md:text-2xl font-semibold mb-2">₹{data.price}</h2>
+      {/* <button onClick={handleCarting} className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
+                    {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart" }
+                </button> */}
+      <button
+        onClick={handleCarting}
+        className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
+      >
+        {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
+      </button>
     </section>
   );
 };

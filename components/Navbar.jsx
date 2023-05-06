@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSession, signOut } from "next-auth/react";
+import CartContext from "../context/CartContext";
 const Navbar = () => {
+  const { cart } = useContext(CartContext);
   const { data: session } = useSession();
   const router = useRouter();
   const [term, setTerm] = useState("");
@@ -51,8 +53,14 @@ const Navbar = () => {
           Teach on Nerdee
         </Link>
 
-        <Link href="/">
+        <Link href="/cart">
           <div className="flex items-center relative">
+            <div
+              className={
+                "absolute h-4 w-4 bg-red-400 rounded-full -top-2 -right-1 " +
+                `${!cart.length ? "hidden" : ""}`
+              }
+            ></div>
             <a href="" className="flex items-center justify-center text-2xl">
               <AiOutlineShoppingCart />
             </a>

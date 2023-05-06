@@ -31,6 +31,23 @@ export const courseDetailQuery = (courseId) => {
       }`;
   return query;
 };
+export const cartDetailQuery = (courseIds) => {
+  // console.log(courseIds);
+  const query = `*[_type == "course" && _id in ${courseIds}]{
+        _id,
+        author,
+        description,
+        price,
+        title,
+        image{
+        asset->{
+        _id,
+        url
+      }
+      }
+      }`;
+  return query;
+};
 export const allSectorsQuery = () => {
   const query = `*[_type == "sector"] | order(_createdAt desc){
     _id,

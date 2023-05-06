@@ -38,7 +38,7 @@ const CourseListCard = ({ data }) => {
         </div>
 
         <div className="w-1/12">
-          <h3 className="text-xl font-bold">${data.price}</h3>
+          <h3 className="text-xl font-bold">₹{data.price}</h3>
         </div>
       </div>
     </Link>

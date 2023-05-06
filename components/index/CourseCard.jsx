@@ -32,7 +32,7 @@ const CourseCard = ({ data }) => {
             <span className="font-semibold mr-3">rating: {data.rating}</span> (
             {data.student_no})
           </h3> */}
-          <h3 className="text-base md:text-xl font-bold">${data.price}</h3>
+          <h3 className="text-base md:text-xl font-bold">₹{data.price}</h3>
           <button className="text-sm w-1/2 py-1 px-2 cursor-auto bg-yellow-500 text-yellow-700 rounded-md">
             Bestseller
           </button>
