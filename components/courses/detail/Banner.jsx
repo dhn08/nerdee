@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import CartContext from "../../../context/CartContext";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Banner = ({ data }) => {
   const { addCart, cart, removeCart } = useContext(CartContext);
+
   const router = useRouter();
+  const { data: user } = useSession();
 
   const { course_uuid } = router.query;
   const handleCarting = () => {
@@ -14,7 +18,13 @@ const Banner = ({ data }) => {
       addCart(course_uuid);
     }
   };
-
+  const courses = user?.user.courses || [];
+  // console.log("Han bhai ye raha:", courses);
+  // console.log(
+  //   courses.findIndex((e) => {
+  //     return e._id.toString() === course_uuid.toString();
+  //   })
+  // );
   return (
     <section className="text-gray-50 bg-gray-800 py-14 px-8">
       <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold w-11/12 md:w-8/12 mb-2">
@@ -44,12 +54,28 @@ const Banner = ({ data }) => {
       {/* <button onClick={handleCarting} className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
                     {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart" }
                 </button> */}
-      <button
+      {/* <button
         onClick={handleCarting}
         className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
       >
         {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
-      </button>
+      </button> */}
+      {courses.findIndex((e) => {
+        return e._id === course_uuid;
+      }) === -1 ? (
+        <button
+          onClick={handleCarting}
+          className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
+        >
+          {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
+        </button>
+      ) : (
+        <Link href={"/course/study/" + course_uuid}>
+          <button className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
+            Start Learning
+          </button>
+        </Link>
+      )}
     </section>
   );
 };

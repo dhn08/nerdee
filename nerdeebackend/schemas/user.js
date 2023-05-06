@@ -23,5 +23,11 @@ export default {
       title: "role",
       type: "string",
     },
+    {
+      name: "courses",
+      title: "courses",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "course" }] }],
+    },
   ],
 };

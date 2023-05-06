@@ -1,10 +1,13 @@
+import { useSession } from "next-auth/react";
 import { useState, createContext, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 
 const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
-  //const {user}=useContext(AuthContext)
+  const { data } = useSession();
+  const [cart, setCart] = useState([]);
+  //const {user}=useContext(AuthCo useSessiontext)
 
   //   const initCart = localStorage.getItem("cart")
   //     ? JSON.parse(localStorage.getItem("cart"))
@@ -17,15 +20,23 @@ export const CartContextProvider = ({ children }) => {
   //         return true
   //     }
   // })])
-  const [cart, setCart] = useState([]);
+
   useEffect(() => {
     // Perform localStorage action
     const initCart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    setCart(initCart);
+    setCart([
+      ...initCart.filter((item) => {
+        if (data?.user) {
+          return !user.courses.includes(item);
+        } else {
+          return true;
+        }
+      }),
+    ]);
 
-    // localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, []);
 
   const addCart = (uuid) => {

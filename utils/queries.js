@@ -118,7 +118,8 @@ export const findUserQuery = (emailId) => {
     email,
     name,
     password,
-    role
+    role,
+    courses[]->
   }`;
   return query;
 };
