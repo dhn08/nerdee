@@ -39,7 +39,7 @@ export const CartContextProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     // Perform localStorage action
-    console.log("Naye use effect se hun", cart);
+    // console.log("Naye use effect se hun", cart);
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 

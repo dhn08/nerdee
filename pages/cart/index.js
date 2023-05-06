@@ -29,8 +29,23 @@ function CartIndex() {
         setRequestingPayment(false);
         toast.error("Please login to proceed!!");
         router.push("/auth/login");
+        return;
       }
+
       const stripe = await stripePromise;
+      const checkoutSession = await axios.post("/api/payment", {
+        cartDetails,
+        email: data.user.email,
+      });
+      //redirect the user
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
+
+      if (result.error) {
+        setRequestingPayment(false);
+        toast.error("Sorry there was an error!!");
+      }
 
       //   const res = await fetch(`${NEXT_BACKEND_URI}/payment/`, {
       //     method: "POST",
@@ -76,7 +91,7 @@ function CartIndex() {
       }
     }
     fetchData();
-  }, []);
+  }, [cart]);
 
   const removeCartDetail = (uuid) => {
     const index = cartDetails.findIndex((detail) => detail._id === uuid);
