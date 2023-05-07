@@ -6,11 +6,11 @@ import Link from "next/link";
 import { findUserQuery } from "../../../utils/queries";
 import client from "../../../utils/client";
 
-const Banner = ({ data }) => {
+const Banner = ({ data, userCourses: courses }) => {
   const { addCart, cart, removeCart } = useContext(CartContext);
-
+  console.log("From banner:", courses);
   const router = useRouter();
-  const { data: user } = useSession();
+  // const { data: user } = useSession();
 
   const { course_uuid } = router.query;
   const handleCarting = () => {
@@ -20,7 +20,7 @@ const Banner = ({ data }) => {
       addCart(course_uuid);
     }
   };
-  const courses = user?.user.courses || [];
+
   // console.log("Han bhai ye raha:", courses);
   // console.log(
   //   courses.findIndex((e) => {
@@ -62,8 +62,8 @@ const Banner = ({ data }) => {
       >
         {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
       </button> */}
-      {courses.findIndex((e) => {
-        return e._id === course_uuid;
+      {courses?.findIndex((e) => {
+        return e === course_uuid;
       }) === -1 ? (
         <button
           onClick={handleCarting}

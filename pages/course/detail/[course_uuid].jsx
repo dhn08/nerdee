@@ -5,11 +5,14 @@ import WhatLearnt from "../../../components/courses/detail/WhatLearnt";
 import Main from "../../../components/layouts/Main";
 import client from "../../../utils/client";
 import { courseDetailQuery } from "../../../utils/queries";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]";
+import { findUserQuery } from "../../../utils/queries";
 
-const course_uuid = ({ courses }) => {
+const course_uuid = ({ courses, userCourses }) => {
   return (
     <Main>
-      <Banner data={courses} />
+      <Banner data={courses} userCourses={userCourses} />
       <WhatLearnt />
       <Description info={courses.description} />
     </Main>
@@ -17,10 +20,24 @@ const course_uuid = ({ courses }) => {
 };
 
 export default course_uuid;
-export async function getServerSideProps({ query: { course_uuid }, req, res }) {
+export async function getServerSideProps({ query: { course_uuid }, res, req }) {
   const q1 = courseDetailQuery(course_uuid);
-
   const courses = await client.fetch(q1);
+  //Insuring fresh data for user after checkout as course array in user is updated.
+  let userCourses = [];
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  if (session) {
+    const q2 = findUserQuery(session.user.email);
+    const userData = await client.fetch(q2);
+    let tempC = userData.courses;
+    tempC.map((item) => {
+      userCourses.push(item._id);
+    });
+    // console.log("id:", userCourses);
+    // userCourses = session.user.courses;
+  }
+
   // const courses = [
   //   {
   //     course_uuid: 1,
@@ -59,6 +76,6 @@ export async function getServerSideProps({ query: { course_uuid }, req, res }) {
   // const data = courses.find((course) => course.course_uuid == course_uuid);
 
   return {
-    props: { courses }, // will be passed to the page component as props
+    props: { courses, userCourses }, // will be passed to the page component as props
   };
 }
