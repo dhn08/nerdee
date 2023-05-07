@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const query = cartDetailQuery(i);
-      console.log(query);
+      // console.log(query);
 
       const cartDetails = await client.fetch(query);
       cartDetails.forEach((element) => {

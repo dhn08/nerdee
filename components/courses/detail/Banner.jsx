@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CartContext from "../../../context/CartContext";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { findUserQuery } from "../../../utils/queries";
+import client from "../../../utils/client";
 
 const Banner = ({ data }) => {
   const { addCart, cart, removeCart } = useContext(CartContext);

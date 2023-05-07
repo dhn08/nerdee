@@ -35,7 +35,8 @@ function CartIndex() {
       const stripe = await stripePromise;
       const checkoutSession = await axios.post("/api/payment", {
         cartDetails,
-        email: data.user.email,
+        userId: data.user._id,
+        cart,
       });
       //redirect the user
       const result = await stripe.redirectToCheckout({

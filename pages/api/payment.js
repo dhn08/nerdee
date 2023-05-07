@@ -1,7 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  const { cartDetails, email } = req.body;
+  const { cartDetails, userId, cart } = req.body;
 
   const transformedItems = cartDetails.map((item) => ({
     quantity: 1,
@@ -21,8 +21,9 @@ export default async function handler(req, res) {
     success_url: `${process.env.HOST}/success`,
     cancel_url: `${process.env.HOST}/cart`,
     metadata: {
-      email,
+      userId,
       images: JSON.stringify(cartDetails.map((item) => item.image.asset.url)),
+      cart: JSON.stringify(cart),
     },
   });
   res.status(200).json({ id: session.id });

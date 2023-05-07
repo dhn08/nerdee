@@ -17,8 +17,9 @@ const course_uuid = ({ courses }) => {
 };
 
 export default course_uuid;
-export async function getServerSideProps({ query: { course_uuid } }) {
+export async function getServerSideProps({ query: { course_uuid }, req, res }) {
   const q1 = courseDetailQuery(course_uuid);
+
   const courses = await client.fetch(q1);
   // const courses = [
   //   {
