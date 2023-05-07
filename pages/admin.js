@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import UserCard from "../components/admin/UserCard";
 import Main from "../components/layouts/Main";
 import client from "../utils/client";
+import { authOptions } from "./api/auth/[...nextauth]";
 import { tempTeacherDetailQuery } from "../utils/queries";
+import { unstable_getServerSession } from "next-auth";
 // const userData = [
 //   {
 //     _id: 1,
@@ -39,6 +41,19 @@ const admin = ({ userData }) => {
 
 export default admin;
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (!session || session.user?.role !== "Admin") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const q1 = tempTeacherDetailQuery();
   const userData = await client.fetch(q1);
 

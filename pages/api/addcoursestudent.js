@@ -4,11 +4,11 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      console.log("Han bhai inside add api");
-      console.log("courseIds: ", courseIds);
-      console.log("courseIds type: ", typeof courseIds);
+      // console.log("Han bhai inside add api");
+      // console.log("courseIds: ", courseIds);
+      // console.log("courseIds type: ", typeof courseIds);
 
-      console.log("userId: ", userId);
+      // console.log("userId: ", userId);
 
       courseIds.map(async (id) => {
         await client

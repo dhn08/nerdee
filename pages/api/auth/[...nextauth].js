@@ -3,7 +3,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import client from "../../../utils/client";
 import { findUserQuery } from "../../../utils/queries";
-export default NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -54,4 +54,5 @@ export default NextAuth({
       return session;
     },
   },
-});
+};
+export default NextAuth(authOptions);

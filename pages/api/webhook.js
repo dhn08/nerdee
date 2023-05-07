@@ -15,7 +15,7 @@ const fulfillOrder = async (session) => {
       userId,
     }
   );
-  console.log("result", result);
+  // console.log("result", result);
   return result;
 };
 export default async (req, res) => {
