@@ -22,21 +22,34 @@ export const CartContextProvider = ({ children }) => {
   // })])
 
   useEffect(() => {
+    // console.log("Inside:", data?.user);
     // Perform localStorage action
     const initCart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    setCart([
-      ...initCart.filter((item) => {
-        if (data?.user) {
-          return !data.user.courses.includes(item);
-        } else {
-          return true;
-        }
-      }),
-    ]);
+    // console.log("init cart:", initCart);
+    const a = initCart.filter((item) => {
+      if (data?.user) {
+        let index = data.user.courses.findIndex((e) => e._id == item);
+        console.log("index", index);
+        return index == -1;
+      } else {
+        return true;
+      }
+    });
+
+    setCart(a);
+    // setCart([
+    //   ...initCart.filter((item) => {
+    //     if (data?.user) {
+    //       return !data.user.courses.includes(item);
+    //     } else {
+    //       return true;
+    //     }
+    //   }),
+    // ]);
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, []);
+  }, [data]);
   useEffect(() => {
     // Perform localStorage action
     // console.log("Naye use effect se hun", cart);
