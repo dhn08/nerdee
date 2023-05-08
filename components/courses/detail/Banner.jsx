@@ -8,7 +8,6 @@ import client from "../../../utils/client";
 
 const Banner = ({ data, userCourses: courses }) => {
   const { addCart, cart, removeCart } = useContext(CartContext);
-  console.log("From banner:", courses);
   const router = useRouter();
   // const { data: user } = useSession();
 
