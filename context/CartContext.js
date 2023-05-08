@@ -29,8 +29,8 @@ export const CartContextProvider = ({ children }) => {
       : [];
     // console.log("init cart:", initCart);
     const a = initCart.filter((item) => {
-      if (data?.user) {
-        let index = data.user.courses.findIndex((e) => e._id == item);
+      if (data?.user.courses) {
+        let index = data.user?.courses.findIndex((e) => e._id == item);
         console.log("index", index);
         return index == -1;
       } else {

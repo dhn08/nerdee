@@ -1,40 +1,33 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import CourseItem from "../components/user/courseItem";
-import AuthContext from "../context/AuthContext";
-import { BACKEND_URI } from "../config/app";
-import cookie from "cookie";
-import refreshToken from "./api/refresh_token";
 import Main from "../components/layouts/Main";
 import { authOptions } from "./api/auth/[...nextauth]";
+import CourseItem from "../components/user/CourseItem";
+import { unstable_getServerSession } from "next-auth";
+import { findUserQuery } from "../utils/queries";
+import client from "../utils/client";
 
-function user() {
-  const [courseDetail, setCourseDetail] = useState([]);
-  const [courseReady, setCourseReady] = useState(false);
+function user({ courseDetail }) {
+  console.log("courseDetail", courseDetail);
+  //   useEffect(async () => {
+  //     if (courses.length > 0) {
+  //       const res = await fetch(`${BACKEND_URI}/courses/cart/`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //         },
+  //         body: JSON.stringify({ cart: courses }),
+  //       });
 
-  const {
-    user: { courses },
-  } = useContext(AuthContext);
+  //       if (res.ok) {
+  //         const details = await res.json();
 
-  useEffect(async () => {
-    if (courses.length > 0) {
-      const res = await fetch(`${BACKEND_URI}/courses/cart/`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ cart: courses }),
-      });
+  //         setCourseDetail([...details.cart_detail]);
 
-      if (res.ok) {
-        const details = await res.json();
-
-        setCourseDetail([...details.cart_detail]);
-
-        setCourseReady(true);
-      }
-    }
-  }, []);
+  //         setCourseReady(true);
+  //       }
+  //     }
+  //   }, []);
 
   return (
     <Main>
@@ -46,20 +39,12 @@ function user() {
 
       <section className="w-full flex justify-between pt-12 px-10  mb-20">
         <div className="w-11/12 md:w-8/12 mx-auto">
-          <h3 className="text-lg my-2">{courses.length} Course</h3>
+          <h3 className="text-lg my-2">{courseDetail.length} Course</h3>
 
-          {courseDetail.length > 0 && courseReady ? (
-            <>
-              {courseDetail.length
-                ? courses.map((item, index) => {
-                    const obj = courseDetail.find(
-                      (detail) => item == detail.course_uuid
-                    );
-
-                    return <CourseItem key={index} course={obj} />;
-                  })
-                : ""}
-            </>
+          {courseDetail.length > 0 ? (
+            courseDetail.map((item, index) => {
+              return <CourseItem key={index} course={item} />;
+            })
           ) : (
             <h3 className="md:text-lg text-center"> You have no courses yet</h3>
           )}
@@ -75,6 +60,7 @@ export const getServerSideProps = async (context) => {
     context.res,
     authOptions
   );
+
   if (!session) {
     return {
       redirect: {
@@ -83,9 +69,14 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+  //   console.log("User se :", session);
+  const query = findUserQuery(session.user.email);
+  const user = await client.fetch(query);
+  //   console.log(user);
+  const courseDetail = user.courses;
 
   return {
-    props: {},
+    props: { courseDetail },
   };
 };
 

@@ -99,7 +99,7 @@ const Navbar = () => {
         ) : (
           <>
             {" "}
-            <Link href="/">
+            <Link href="/user">
               <p className="text-blue-500 cursor-pointer ">
                 {session.user.name}
               </p>

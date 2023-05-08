@@ -31,7 +31,7 @@ export async function getServerSideProps({ query: { course_uuid }, res, req }) {
     const q2 = findUserQuery(session.user.email);
     const userData = await client.fetch(q2);
     let tempC = userData.courses;
-    tempC.map((item) => {
+    tempC?.map((item) => {
       userCourses.push(item._id);
     });
     // console.log("id:", userCourses);
