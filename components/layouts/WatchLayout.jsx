@@ -19,7 +19,7 @@ const WatchLayout = ({ children, title }) => {
         <div className="overflow-hidden">| {title}</div>
       </nav>
 
-      <ToastContainer autoClose={20000} />
+      <ToastContainer autoClose={1500} />
 
       {children}
 

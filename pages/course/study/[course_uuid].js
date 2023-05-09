@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import client from "../../../utils/client";
 import {
   courseSectionsDetailQuery,
@@ -13,6 +13,7 @@ const course_uuid = ({ data }) => {
   const [comments, setComments] = useState(data.comment);
   console.log("Han bhai dara:", data);
   const [title, setTitle] = useState(data.title);
+
   return (
     <WatchLayout title={title}>
       <WatchArea sections={data.course_sections} />

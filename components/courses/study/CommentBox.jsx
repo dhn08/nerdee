@@ -15,12 +15,7 @@ function CommentBox({ setComment, comments }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const new_comment = {
-      user: {
-        name,
-      },
-      message,
-    };
+
     // const payload = {
     //   course_uuid,
     //   message,
