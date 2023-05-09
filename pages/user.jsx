@@ -8,7 +8,7 @@ import { findUserQuery } from "../utils/queries";
 import client from "../utils/client";
 
 function user({ courseDetail }) {
-  console.log("courseDetail", courseDetail);
+  // console.log("courseDetail", courseDetail);
   //   useEffect(async () => {
   //     if (courses.length > 0) {
   //       const res = await fetch(`${BACKEND_URI}/courses/cart/`, {
@@ -39,9 +39,9 @@ function user({ courseDetail }) {
 
       <section className="w-full flex justify-between pt-12 px-10  mb-20">
         <div className="w-11/12 md:w-8/12 mx-auto">
-          <h3 className="text-lg my-2">{courseDetail.length} Course</h3>
+          <h3 className="text-lg my-2">{courseDetail?.length} Course</h3>
 
-          {courseDetail.length > 0 ? (
+          {courseDetail?.length > 0 ? (
             courseDetail.map((item, index) => {
               return <CourseItem key={index} course={item} />;
             })
@@ -69,10 +69,10 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
-  //   console.log("User se :", session);
+  //console.log("User se :", session);
   const query = findUserQuery(session.user.email);
   const user = await client.fetch(query);
-  //   console.log(user);
+  // console.log(user);
   const courseDetail = user.courses;
 
   return {
