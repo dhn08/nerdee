@@ -7,6 +7,8 @@ import courses from "./courses";
 import sector from "./sector";
 import tempteacher from "./tempteacher";
 import user from "./user";
+import courseSection from "./courseSection";
+import episode from "./episode";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -18,6 +20,8 @@ export default createSchema({
     sector,
     tempteacher,
     user,
+    courseSection,
+    episode,
     /* Your types here! */
   ]),
 });

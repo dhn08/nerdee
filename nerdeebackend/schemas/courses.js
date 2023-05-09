@@ -31,5 +31,11 @@ export default {
         hotspot: true,
       },
     },
+    {
+      name: "course_sections",
+      title: "Course Sections",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "courseSection" }] }],
+    },
   ],
 };
