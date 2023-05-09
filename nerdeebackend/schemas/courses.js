@@ -37,5 +37,11 @@ export default {
       type: "array",
       of: [{ type: "reference", to: [{ type: "courseSection" }] }],
     },
+    {
+      name: "comment",
+      title: "Comment",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "comment" }] }],
+    },
   ],
 };

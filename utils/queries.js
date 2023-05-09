@@ -34,6 +34,7 @@ export const courseDetailQuery = (courseId) => {
 export const courseSectionsDetailQuery = (courseId) => {
   const query = `*[_type == "course" && _id == '${courseId}'][0]{
     title,
+    comment[]->{_id,message,_createdAt,user->{_id,name}},
     course_sections[]->{
       section_number,
       section_title,
@@ -45,6 +46,13 @@ export const courseSectionsDetailQuery = (courseId) => {
       }
     }
       }`;
+  return query;
+};
+export const getCommentQuery = (commentId) => {
+  const query = `*[_type == "comment" && _id == '${commentId}'][0]{
+    message,
+    user->{name}
+  }`;
   return query;
 };
 export const cartDetailQuery = (courseIds) => {

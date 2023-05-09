@@ -8,14 +8,15 @@ import WatchLayout from "../../../components/layouts/WatchLayout";
 import WatchArea from "../../../components/courses/study/WatchArea";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
+import CommentArea from "../../../components/courses/study/CommentArea";
 const course_uuid = ({ data }) => {
-  //   const [comments, setComments] = useState(data.comment);
+  const [comments, setComments] = useState(data.comment);
   console.log("Han bhai dara:", data);
   const [title, setTitle] = useState(data.title);
   return (
     <WatchLayout title={title}>
       <WatchArea sections={data.course_sections} />
-      {/* <CommentArea comments={comments} setComment={setComments} /> */}
+      <CommentArea comments={comments} setComment={setComments} />
     </WatchLayout>
   );
 };
@@ -44,9 +45,9 @@ export const getServerSideProps = async ({
       userCourses.push(item._id);
     });
 
-    console.log("userCourses", userCourses);
-    console.log("course_uuid", course_uuid);
-    console.log("resu:", !userCourses.includes(course_uuid));
+    // console.log("userCourses", userCourses);
+    // console.log("course_uuid", course_uuid);
+    // console.log("resu:", !userCourses.includes(course_uuid));
     if (!userCourses.includes(course_uuid)) {
       console.log("andar hun");
       return {
