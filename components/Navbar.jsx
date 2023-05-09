@@ -44,7 +44,7 @@ const Navbar = () => {
           value={term}
           onChange={handleChange}
           type="text"
-          placeholder="Search for a anything..."
+          placeholder="Search for a course .."
           className="w-10/12 py-1 outline-none bg-transparent "
         />
       </form>
