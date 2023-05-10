@@ -8,12 +8,9 @@ function CommentArea({ comments, setComment }) {
       <div className="w-11/12 md:w-10/12 lg:w-8/12">
         <h2 className="text-center  text-2xl font-semibold mb-4">Comments</h2>
 
-        {comments.map((comment, index) => {
-          let colors = ["red", "blue", "yellow", "pink"];
-          let color = colors[Math.floor(Math.random() * 4)];
-
-          console.log("Inside map:", color);
-          return <CommentMsg key={index} color={color} comment={comment} />;
+        {comments?.map((comment, index) => {
+          let num = Math.floor(Math.random() * 4);
+          return <CommentMsg key={index} num={num} comment={comment} />;
         })}
 
         <CommentBox comments={comments} setComment={setComment} />

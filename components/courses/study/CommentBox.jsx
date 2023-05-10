@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import { comment } from "postcss";
 import React, { useState, useContext } from "react";
 import { toast } from "react-toastify";
 
@@ -36,7 +37,13 @@ function CommentBox({ setComment, comments }) {
       toast.error("could not add your comment");
     } else {
       toast.success("comment added");
-      setComment([...comments, res.data]);
+      console.log("Yahan se:", comments);
+      if (!comment) {
+        setComment[res.data];
+      } else {
+        setComment([...comments, res.data]);
+      }
+
       setMessage("");
     }
   };

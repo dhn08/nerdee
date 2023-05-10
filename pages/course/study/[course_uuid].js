@@ -12,7 +12,7 @@ import CommentArea from "../../../components/courses/study/CommentArea";
 const course_uuid = ({ data }) => {
   const [comments, setComments] = useState(data.comment);
   console.log("Han bhai dara:", data);
-  const [title, setTitle] = useState(data.title);
+  const [title, setTitle] = useState(data.title || []);
 
   return (
     <WatchLayout title={title}>
