@@ -37,7 +37,7 @@ function CommentBox({ setComment, comments }) {
       toast.error("could not add your comment");
     } else {
       toast.success("comment added");
-      console.log("Yahan se:", comments);
+      // console.log("Yahan se:", comments);
       if (!comment) {
         setComment[res.data];
       } else {

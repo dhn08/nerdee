@@ -6,7 +6,7 @@ import {
 import CourseContentItem from "../detail/CourseContentItem";
 
 const WatchListItem = ({ section, setSrc }) => {
-  const [hidden, setHidden] = useState();
+  const [hidden, setHidden] = useState(true);
   const handleHidden = () => {
     setHidden(!hidden);
   };

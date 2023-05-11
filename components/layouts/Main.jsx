@@ -9,7 +9,7 @@ const Main = ({ children }) => {
       <Navbar />
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={800}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
