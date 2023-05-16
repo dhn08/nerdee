@@ -2,30 +2,74 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Main from "../../components/layouts/Main";
 import { MdTitle } from "react-icons/md";
+import { AiOutlineUser } from "react-icons/ai";
+import { IoPricetagOutline } from "react-icons/io5";
+import { BiCategory } from "react-icons/bi";
+import { BsImageFill } from "react-icons/bs";
 import { CgDetailsMore } from "react-icons/cg";
 import FormInput from "../../components/auth/FormInput";
 import FormTextArea from "../../components/auth/FormTextArea";
-import Link from "next/link";
-const addCourse = () => {
+
+import { allSectorsNameQuery } from "../../utils/queries";
+import FormSelection from "../../components/auth/FormSelection";
+import client from "../../utils/client";
+import ImageInput from "../../components/auth/ImageInput";
+import { toast } from "react-toastify";
+import axios from "axios";
+const addCourse = ({ sectors }) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [author, setauthor] = useState("");
+  const [selectedOption, setselectedOption] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [uploading, setuploading] = useState(false);
   const handleAddCourse = async (e) => {
     e.preventDefault();
-    const status = await signIn("credentials", {
-      redirect: false,
-      email: email,
-      password: password,
-      callbackUrl: "/",
-    });
-    console.log(status);
-    if (!status.ok) {
-      toast(status.error);
+    setuploading(true);
+    if (!selectedImage) {
+      toast("Please select image");
+      setuploading(false);
+      return;
     }
-    if (status.ok) {
-      router.push(status.url);
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("selectedOption", selectedOption);
+    formData.append("author", author);
+
+    try {
+      const { data } = await axios.post("/api/teacher/addCourse", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (data) {
+        setuploading(false);
+        toast(data.msg);
+        console.log(data);
+        setTitle("");
+        setauthor("");
+        setDescription("");
+        setPrice("");
+        setselectedOption("");
+        setSelectedImage(null);
+      }
+    } catch (error) {
+      toast(error.message);
     }
+    // if (!status.ok) {
+    //   toast(status.error);
+    // }
+    // if (status.ok) {
+    //   router.push(status.url);
+    // }
   };
+
   return (
     <Main>
       <section className="flex justify-center pt-20 min-h-screen">
@@ -34,7 +78,7 @@ const addCourse = () => {
             Add course
           </h2>
 
-          <form onSubmit={handleAddCourse} className="w-full py-4">
+          <form onSubmit={handleAddCourse} className="w-full py-4 space-y-6">
             <FormInput
               inputVal={title}
               setInput={setTitle}
@@ -43,6 +87,14 @@ const addCourse = () => {
               placeholder="Title"
               name="title"
             />
+            <FormInput
+              inputVal={author}
+              setInput={setauthor}
+              type="text"
+              iconName={<AiOutlineUser />}
+              placeholder="Author"
+              name="author"
+            />
             <FormTextArea
               inputVal={description}
               setInput={setDescription}
@@ -50,24 +102,38 @@ const addCourse = () => {
               placeholder="Description"
               name="Description"
             />
+            <FormInput
+              inputVal={price}
+              setInput={setPrice}
+              type="number"
+              iconName={<IoPricetagOutline />}
+              placeholder="Price"
+              name="price"
+            />
+            <FormSelection
+              inputVal={selectedOption}
+              setInput={setselectedOption}
+              sectors={sectors}
+              iconName={<BiCategory />}
+            />
 
+            <ImageInput
+              iconName={<BsImageFill />}
+              inputVal={selectedImage}
+              setInput={setSelectedImage}
+              name="image"
+            />
             {/* <AuthBtn
                 disabled={authReady}
                 action={!authReady ? "Log In" : "Please wait..."}
               /> */}
             <button
+              disabled={uploading}
               type="submit"
               className="block w-full bg-red-500 my-4 py-3 text-gray-50 rounded font-semibold"
             >
-              Submit
+              {!uploading ? "Add Course" : "Please Wait ..."}
             </button>
-
-            <p className="md:text-lg my-2 text-center ">
-              Do not have an account?{" "}
-              <span className="text-blue-600 font-medium">
-                <Link href="/auth/signup">Sign Up</Link>
-              </span>
-            </p>
           </form>
         </div>
       </section>
@@ -76,3 +142,12 @@ const addCourse = () => {
 };
 
 export default addCourse;
+
+export async function getServerSideProps(context) {
+  const q1 = allSectorsNameQuery();
+  const sectors = await client.fetch(q1);
+
+  return {
+    props: { sectors }, // will be passed to the page component as props
+  };
+}

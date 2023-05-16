@@ -14,6 +14,7 @@ const FormTextArea = ({
         <span>{iconName}</span>
       </div>
       <textarea
+        required
         placeholder={placeholder}
         value={inputVal}
         onChange={(e) => setInput(e.target.value)}

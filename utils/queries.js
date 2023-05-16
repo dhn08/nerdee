@@ -72,6 +72,15 @@ export const cartDetailQuery = (courseIds) => {
       }`;
   return query;
 };
+export const allSectorsNameQuery = () => {
+  const query = `*[_type == "sector"] | order(_createdAt desc){
+    _id,
+    sector_name,
+  }`;
+
+  return query;
+};
+
 export const allSectorsQuery = () => {
   const query = `*[_type == "sector"] | order(_createdAt desc){
     _id,
