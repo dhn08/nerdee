@@ -18,7 +18,7 @@ const Header = () => {
         <form className="flex justify-center w-full px-1 py-2 rounded-md border border-gray-400">
           <input
             type="text"
-            placeholder="What fo you want to learn ?"
+            placeholder="What  you want to learn ?"
             className="outline-none bg-transparent w-10/12 py-2"
           />
           <div className="flex justify-center items-center text-2xl">
