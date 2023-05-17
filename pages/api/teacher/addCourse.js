@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         const courseDoc = {
           _type: "course",
           title: title,
-          author: author[0],
+          author: author,
           description: description,
           price: parseInt(price),
           image: {
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
             },
           },
         };
-        console.log("courseDoc", courseDoc);
+
         const newlyAddedCourse = await client.create(courseDoc);
         await client
           .patch(selectedOption)
