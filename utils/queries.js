@@ -36,6 +36,7 @@ export const courseSectionsDetailQuery = (courseId) => {
     title,
     comment[]->{_id,message,_createdAt,user->{_id,name}},
     course_sections[]->{
+      _id,
       section_number,
       section_title,
       episodes[]->{

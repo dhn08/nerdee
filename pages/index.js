@@ -10,6 +10,8 @@ import Main from "../components/layouts/Main";
 import client from "../utils/client";
 import { allCoursesQuery } from "../utils/queries";
 import { allSectorsQuery } from "../utils/queries";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth";
 // const sectors = [
 //   {
 //     sector_uuid: 1,
@@ -126,6 +128,20 @@ export async function getServerSideProps(context) {
   const courses = await client.fetch(q1);
   const q2 = allSectorsQuery();
   const sectors = await client.fetch(q2);
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (session?.user.role == "Teacher") {
+    return {
+      redirect: {
+        destination: "/teacher",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: { courses, sectors }, // will be passed to the page component as props

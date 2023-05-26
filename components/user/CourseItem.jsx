@@ -17,7 +17,7 @@ const CourseItem = ({ course }) => {
         <div className="w-8/12">
           <h3 className="font-semibold text-sm md:text-base">{course.title}</h3>
 
-          <h5 className="text-xs  text-gray-400">{course.author.name}</h5>
+          <h5 className="text-xs  text-gray-400">{course.author}</h5>
         </div>
       </div>
     </Link>

@@ -115,6 +115,7 @@ const addCourse = ({ sectors, user }) => {
               inputVal={selectedOption}
               setInput={setselectedOption}
               sectors={sectors}
+              name="Select Category"
               iconName={<BiCategory />}
             />
 

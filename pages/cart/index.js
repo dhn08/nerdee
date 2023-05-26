@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 const stripePromise = loadStripe(process.env.stripe_public_key);
 function CartIndex() {
   // const [cartSize,setCartSize]=useState(0)
@@ -166,3 +168,19 @@ function CartIndex() {
 }
 
 export default CartIndex;
+
+export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  if (session.user.role == "Teacher") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
