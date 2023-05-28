@@ -27,6 +27,18 @@ export const courseDetailQuery = (courseId) => {
         _id,
         url
       }
+      },
+      comment[]->{_id,message,_createdAt,user->{_id,name}},
+      course_sections[]->{
+        _id,
+        section_number,
+        section_title,
+        episodes[]->{
+          title,
+          file{
+          asset->{url}
+        }
+        }
       }
       }`;
   return query;

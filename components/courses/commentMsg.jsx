@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function commentMsg({ comment, num }) {
+function CommentMsg({ comment, num }) {
   // const colorsArray = ["blue", "indigo", "red", "yellow", "green"];
   // const [c, setC] = useState(color);
 
@@ -28,7 +28,7 @@ function commentMsg({ comment, num }) {
     `md:h-16 h-11 w-11 md:w-16 rounded-full flex justify-center items-center bg-yellow-600`,
     `md:h-16 h-11 w-11 md:w-16 rounded-full flex justify-center items-center bg-blue-600`,
   ];
-  console.log("From msg:", texts[num]);
+
   return (
     <div className="flex py-4 border-b  ">
       <div className="flex justify-center mr-3">
@@ -48,4 +48,4 @@ function commentMsg({ comment, num }) {
   );
 }
 
-export default commentMsg;
+export default CommentMsg;

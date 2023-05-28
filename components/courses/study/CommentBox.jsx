@@ -26,7 +26,7 @@ function CommentBox({ setComment, comments }) {
     //   method: "POST",
     //   body: JSON.stringify({ data: { message }, course_uuid }),
     // });
-    console.log(process.env.HOST);
+    // console.log(process.env.HOST);
     const res = await axios.post("http://localhost:3000/api/addComment", {
       courseId: course_uuid,
       message,

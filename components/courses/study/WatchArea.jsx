@@ -3,7 +3,7 @@ import WatchList from "./WatchList";
 
 const WatchArea = ({ sections }) => {
   const [src, setSrc] = useState(sections[0].episodes[0].file.asset.url);
-  console.log("From wathc area : ", sections);
+  // console.log("From wathc area : ", sections);
   return (
     <section className="flex flex-col lg:flex-row">
       <div className="lg:w-9/12 w-full bg-black h-96 lg:h-screen">

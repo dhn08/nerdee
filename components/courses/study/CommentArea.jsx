@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import CommentMsg from "../commentMsg";
+
 import CommentBox from "./CommentBox";
+import CommentMsg from "../CommentMsg";
 
 function CommentArea({ comments, setComment }) {
   return (
