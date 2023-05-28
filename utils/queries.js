@@ -35,6 +35,7 @@ export const courseDetailQuery = (courseId) => {
         section_title,
         episodes[]->{
           title,
+          duration,
           file{
           asset->{url}
         }
@@ -53,6 +54,7 @@ export const courseSectionsDetailQuery = (courseId) => {
       section_title,
       episodes[]->{
         title,
+        duration,
         file{
         asset->{url}
       }

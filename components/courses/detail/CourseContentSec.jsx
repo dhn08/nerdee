@@ -4,6 +4,7 @@ import {
   IoChevronUpCircleOutline,
 } from "react-icons/io5";
 import CourseContentList from "./CourseContentList";
+import formatTime from "../../../utils/formatTime";
 
 const CourseContentSec = ({ section }) => {
   const [hidden, setHidden] = useState(true);
@@ -11,6 +12,8 @@ const CourseContentSec = ({ section }) => {
   const changeHidden = () => {
     setHidden(!hidden);
   };
+  let total_length = 0;
+  section.episodes.map((ep) => (total_length += ep.duration));
   return (
     <div>
       <div
@@ -31,13 +34,13 @@ const CourseContentSec = ({ section }) => {
             </h3>
           </div>
         </div>
-        <div className="w-4/12 md:w-3/12 lg:w-2/12">
+        <div className="w-4/12 md:w-3/12 lg:w-4/12">
           <ul className="flex text-xs md:text-base">
             <li className="mr-1">
               {section.episodes.length} lecture
               {section.episodes.length > 1 && "s"}
             </li>
-            {/* <li>• {section.total_duration}</li> */}
+            <li>• {formatTime(total_length)}</li>
           </ul>
         </div>
       </div>

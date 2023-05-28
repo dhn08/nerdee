@@ -25,12 +25,29 @@ const id = ({ course_sections }) => {
 
   //   console.log("title:", title);
   //   console.log("selected:", selectedOption);
+ 
+  const getVideoDuration = (videoFile) => {
+    return new Promise((resolve, reject) => {
+      const videoPlayer = document.createElement("video");
+      videoPlayer.src = URL.createObjectURL(videoFile);
 
+      videoPlayer.onloadedmetadata = () => {
+        const duration = videoPlayer.duration;
+        resolve(duration);
+        URL.revokeObjectURL(videoPlayer.src);
+      };
+
+      videoPlayer.onerror = (error) => {
+        reject(error);
+        URL.revokeObjectURL(videoPlayer.src);
+      };
+    });
+  };
   const handleAddLecture = async (e) => {
     e.preventDefault();
     setuploading(true);
     if (!selectedVideo) {
-      toast("Please select image");
+      toast("Please select video");
       setuploading(false);
       return;
     }
@@ -43,11 +60,14 @@ const id = ({ course_sections }) => {
 
     // }
     const vedioData = await client.assets.upload("file", selectedVideo);
+    const videoDuration = await getVideoDuration(selectedVideo);
+
     try {
       const { data } = await axios.post("/api/teacher/addLecture", {
         selectedOption,
         vedioData,
         title,
+        videoDuration,
       });
 
       if (data) {
@@ -61,12 +81,12 @@ const id = ({ course_sections }) => {
     } catch (error) {
       toast(error.message);
     }
-    // if (!status.ok) {
-    //   toast(status.error);
-    // }
-    // if (status.ok) {
-    //   router.push(status.url);
-    // }
+    if (!status.ok) {
+      toast(status.error);
+    }
+    if (status.ok) {
+      router.push(status.url);
+    }
   };
 
   return (
@@ -76,7 +96,7 @@ const id = ({ course_sections }) => {
           <h2 className="text-xl md:text-2xl font-medium py-3 border-b pl-5">
             Add Lecture
           </h2>
-          {course_sections.length ? (
+          {course_sections ? (
             <>
               <form
                 onSubmit={handleAddLecture}

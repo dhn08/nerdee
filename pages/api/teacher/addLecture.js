@@ -1,7 +1,7 @@
 import client from "../../../utils/client";
 
 export default async function handler(req, res) {
-  const { selectedOption, vedioData, title } = req.body;
+  const { selectedOption, vedioData, title, videoDuration } = req.body;
   const sectionId = selectedOption;
   const episodeDoc = {
     _type: "episode",
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
         _ref: vedioData._id, // Replace with the asset ID of the uploaded video
       },
     },
+    duration: { videoDuration },
   };
   if (req.method === "POST") {
     try {

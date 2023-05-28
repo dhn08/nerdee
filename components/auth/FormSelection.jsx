@@ -32,7 +32,7 @@ const FormSelection = ({
         {sectors.map((sector) => {
           return (
             <option key={sector._id} value={sector._id}>
-              {sector.section_title}
+              {sector.section_title || sector.sector_name}
             </option>
           );
         })}

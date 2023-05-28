@@ -1,6 +1,7 @@
 import React from "react";
 // import { IoCaretForwardCircleSharp } from "react-icons/io";
 import { IoCaretForwardCircleSharp } from "react-icons/io5";
+import formatTime from "../../../utils/formatTime";
 function CourseContentItem({ data, setSrc }) {
   const handleClick = () => {
     if (setSrc) {
@@ -21,9 +22,9 @@ function CourseContentItem({ data, setSrc }) {
           <h3 className="text-sm md:text-lg font-medium ">{data.title}</h3>
         </div>
       </div>
-      {/* <div>
-        <p className="text-sm md:text-base">{data.length}</p>
-      </div> */}
+      <div>
+        <p className="text-sm md:text-base">{formatTime(data.duration)}</p>
+      </div>
     </div>
   );
 }

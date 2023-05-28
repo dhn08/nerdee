@@ -19,5 +19,10 @@ export default {
       },
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "duration",
+      type: "number",
+      title: "Duration (seconds)",
+    },
   ],
 };
