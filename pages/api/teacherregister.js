@@ -10,11 +10,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMPT_PASSWORD, // generated ethereal password
   },
   service: process.env.SMPT_SERVICE,
-  //   service: "gmail",
-  //   auth: {
-  //     user: "btech19eskcs070@skit.ac.in",
-  //     pass: "23508414",
-  //   },
 });
 const mailOptions = {
   from: "btech19eskcs070@skit.ac.in",

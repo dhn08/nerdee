@@ -8,7 +8,7 @@ const Feedback = ({ comments }) => {
           Feedbacks
         </h2>
 
-        {comments.length ? (
+        {comments?.length ? (
           comments.map((comment) => {
             let num = Math.floor(Math.random() * 4);
             return <CommentMsg key={comment._id} num={num} comment={comment} />;

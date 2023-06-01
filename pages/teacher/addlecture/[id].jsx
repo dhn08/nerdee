@@ -21,11 +21,12 @@ const id = ({ course_sections }) => {
   const [selectedOption, setselectedOption] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [uploading, setuploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   //   console.log("vedio", selectedVideo);
 
   //   console.log("title:", title);
   //   console.log("selected:", selectedOption);
- 
+
   const getVideoDuration = (videoFile) => {
     return new Promise((resolve, reject) => {
       const videoPlayer = document.createElement("video");
@@ -60,6 +61,7 @@ const id = ({ course_sections }) => {
 
     // }
     const vedioData = await client.assets.upload("file", selectedVideo);
+
     const videoDuration = await getVideoDuration(selectedVideo);
 
     try {
@@ -81,12 +83,12 @@ const id = ({ course_sections }) => {
     } catch (error) {
       toast(error.message);
     }
-    if (!status.ok) {
-      toast(status.error);
-    }
-    if (status.ok) {
-      router.push(status.url);
-    }
+    // if (!status.ok) {
+    //   toast(status.error);
+    // }
+    // if (status.ok) {
+    //   router.push(status.url);
+    // }
   };
 
   return (
@@ -125,7 +127,7 @@ const id = ({ course_sections }) => {
                   setInput={setSelectedVideo}
                   name="video"
                 />
-
+                {progress > 0 && <progress value={progress} max="100" />}
                 <button
                   disabled={uploading}
                   type="submit"

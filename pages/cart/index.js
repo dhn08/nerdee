@@ -171,7 +171,7 @@ export default CartIndex;
 
 export async function getServerSideProps({ req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);
-  if (session.user.role == "Teacher") {
+  if (session?.user.role == "Teacher") {
     return {
       redirect: {
         destination: "/",

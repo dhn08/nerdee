@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         _ref: vedioData._id, // Replace with the asset ID of the uploaded video
       },
     },
-    duration: { videoDuration },
+    duration: videoDuration,
   };
   if (req.method === "POST") {
     try {

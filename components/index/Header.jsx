@@ -1,6 +1,18 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 const Header = () => {
+  const router = useRouter();
+  const [term, setTerm] = useState("");
+  const handleChange = (e) => {
+    setTerm(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push("/search/" + term);
+    setTerm("");
+  };
   return (
     <section className="w-full md:h-96 relative flex flex-col md:flex-row md:items-center">
       <div className="h-44 md:absolute w-full md:h-full top-0 left-0 z-0">
@@ -15,9 +27,14 @@ const Header = () => {
           Ambition accepted. Learn the latest skills to reach your professional
           goals.
         </p>
-        <form className="flex justify-center w-full px-1 py-2 rounded-md border border-gray-400">
+        <form
+          onSubmit={handleSubmit}
+          className="flex justify-center w-full px-1 py-2 rounded-md border border-gray-400"
+        >
           <input
             type="text"
+            value={term}
+            onChange={handleChange}
             placeholder="What  you want to learn ?"
             className="outline-none bg-transparent w-10/12 py-2"
           />
