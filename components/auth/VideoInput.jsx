@@ -24,7 +24,7 @@ const VideoInput = ({ name, iconName, setInput, inputVal }) => {
         <input name={name} {...getInputProps()} />
         <p>
           Drag and drop an Course lecture video here, or click to select a
-          vedio.
+          video.
         </p>
       </div>
       {inputVal && (
@@ -44,7 +44,7 @@ const VideoInput = ({ name, iconName, setInput, inputVal }) => {
         }`}
       >
         <input name={name} {...getInputProps()} />
-        <button onClick={() => setInput(null)}>Change Vedio.</button>
+        <button onClick={() => setInput(null)}>Change Video.</button>
       </div>
     </div>
   );

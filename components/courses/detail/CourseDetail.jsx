@@ -4,7 +4,7 @@ import formatTime from "../../../utils/formatTime";
 const CourseDetail = ({ sections }) => {
   let total_lectures = 0;
   let total_length = 0;
-  sections.map((section) => {
+  sections?.map((section) => {
     total_lectures += section.episodes.length;
     section.episodes.map((ep) => (total_length += ep.duration));
   });
@@ -15,14 +15,14 @@ const CourseDetail = ({ sections }) => {
           Course Content
         </h2>
         <ul className="flex w-full space-x-3 text-sm md:text-base">
-          <li className="mr-1 inline-block">{sections.length} sections</li>
+          <li className="mr-1 inline-block">{sections?.length} sections</li>
           <li className="mr-1  inline-block">• {total_lectures} lectures</li>
           <li className="mr-1  inline-block">
             {`• ${formatTime(total_length)} total length`}
           </li>
         </ul>
         <div className="my-4">
-          {sections.map((section, index) => (
+          {sections?.map((section, index) => (
             <CourseContentSec section={section} key={index} />
           ))}
         </div>
