@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
-import OrderPlacedCard from "../components/success/orderPlacedCard";
+import OrderPlacedCard from "../components/success/OrderPlacedCard";
 import CartContext from "../context/CartContext";
 const stripePromise = loadStripe(process.env.stripe_public_key);
 function Success() {
