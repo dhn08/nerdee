@@ -4,9 +4,9 @@ import { buffer } from "micro";
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 const fulfillOrder = async (session) => {
   const { cart, userId } = session.metadata;
-  console.log("Inside fullfill order");
-  console.log("cart:", cart);
-  console.log("userId:", userId);
+  // console.log("Inside fullfill order");
+  // console.log("cart:", cart);
+  // console.log("userId:", userId);
   // const result = await axios.post(
   //   "http://localhost:3000/api/addcoursestudent",
   //   {
@@ -15,10 +15,14 @@ const fulfillOrder = async (session) => {
   //   }
   // );
   // console.log("Insied fulFill order :", process.env.HOST);
-  const result = await axios.post(`${process.env.HOST}/api/addcoursestudent`, {
-    courseIds: JSON.parse(cart),
-    userId,
-  });
+  const result = await axios.post(
+    `${process.env.HOST}/api/addcoursestudent`,
+    {
+      courseIds: JSON.parse(cart),
+      userId,
+    },
+    { timeout: 10000 }
+  );
   // console.log("result", result);
   return result;
 };
@@ -38,7 +42,7 @@ const handleWebhook = async (req, res) => {
     //handle the spech checkout.session.complete event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      console.log("han bhai");
+      // console.log("han bhai");
       return fulfillOrder(session)
         .then(() => res.status(200))
         .catch((err) => res.status(400).send(`Webhook erro:`, err.message));
