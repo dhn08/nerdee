@@ -38,9 +38,12 @@ const Header = () => {
             placeholder="What  you want to learn ?"
             className="outline-none bg-transparent w-10/12 py-2"
           />
-          <div className="flex justify-center items-center text-2xl">
+          <button
+            type="submit"
+            className="flex justify-center items-center text-2xl"
+          >
             <BsSearch />
-          </div>
+          </button>
         </form>
       </div>
     </section>

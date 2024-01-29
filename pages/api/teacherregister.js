@@ -27,9 +27,15 @@ export default async function handler(req, res) {
         email,
         password: await hash(password, 12),
       };
-      const query = `*[_type == "tempteacher" && email=='${document.email}'][0]`;
-      const check = await client.fetch(query);
-      if (check) {
+      const query1 = `*[_type == "tempteacher" && email=='${email}'][0]`;
+      const query2 = `*[_type == "user" && email=='${email}'][0]`;
+
+      const check1 = await client.fetch(query1);
+      const check2 = await client.fetch(query2);
+      console.log("Check1 :", check1);
+      console.log("Check2 :", check2);
+
+      if (check1 || check2) {
         return res.status(201).json("Email already regestered");
       } else {
         transporter.sendMail(mailOptions, function (error, info) {
