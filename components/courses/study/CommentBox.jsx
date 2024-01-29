@@ -8,7 +8,7 @@ function CommentBox({ setComment, comments }) {
   const [message, setMessage] = useState("");
 
   const router = useRouter();
-  const { Course_uuid } = router.query;
+  const { course_uuid } = router.query;
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -27,8 +27,8 @@ function CommentBox({ setComment, comments }) {
     //   body: JSON.stringify({ data: { message }, course_uuid }),
     // });
     // console.log(process.env.HOST);
-    const res = await axios.post("http://localhost:3000/api/addComment", {
-      courseId: Course_uuid,
+    const res = await axios.post(`${process.env.HOST}/api/addComment`, {
+      courseId: course_uuid,
       message,
     });
     console.log("res", res);
