@@ -7,7 +7,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-toastify";
-const signup = () => {
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +88,7 @@ const signup = () => {
             <p className="md:text-lg my-2 text-center ">
               Already have an account?{" "}
               <span className="text-blue-600 font-medium">
-                <Link href="/auth/login">Log In</Link>
+                <Link href="/auth/Login">Log In</Link>
               </span>
             </p>
           </form>
@@ -98,4 +98,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

@@ -19,7 +19,7 @@ const CourseSuggest = ({ sectors, courses }) => {
   return (
     <section className="pt-12 md:pt-16 bg-white px-5 md:px-10">
       <h3 className="text-xl md:text-2xl font-semibold mb-2">
-        The world's largest selection of courses
+        The world&rsquo;s largest selection of courses
       </h3>
       <h4 className="text-sm md:text-lg text-gray-400 mb-8">
         Choose from 155,000 online video courses with new additions published

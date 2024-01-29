@@ -50,7 +50,7 @@ const Navbar = () => {
         />
       </form>
       <div className="w-3/12 flex items-center md:w-2/12 justify-center lg:justify-between">
-        <Link className="hidden lg:block" href="/auth/signupTeacher">
+        <Link className="hidden lg:block" href="/auth/SignupTeacher">
           Teach on Nerdee
         </Link>
 
@@ -85,13 +85,13 @@ const Navbar = () => {
           <>
             {" "}
             <button
-              onClick={() => pushRoute("/auth/login")}
+              onClick={() => pushRoute("/auth/Login")}
               className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border border-blue-500 font-semibold text-blue-500  bg-white "
             >
               Log In
             </button>
             <button
-              onClick={() => pushRoute("/auth/signup")}
+              onClick={() => pushRoute("/auth/Signup")}
               className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-500 font-semibold text-white"
             >
               Sign Up

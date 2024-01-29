@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import CourseItem from "../../components/teacher/CourseItem";
 
-const index = ({ courseDetail }) => {
+const Index = ({ courseDetail }) => {
   const router = useRouter();
   return (
     <MainTeacher>
@@ -19,7 +19,7 @@ const index = ({ courseDetail }) => {
         </h2>
         <div className="w-1/2">
           <button
-            onClick={() => router.push("/teacher/addCourse")}
+            onClick={() => router.push("/teacher/AddCourse")}
             className="text-sm  py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-400  font-semibold text-white"
           >
             Add Course
@@ -44,7 +44,7 @@ const index = ({ courseDetail }) => {
   );
 };
 
-export default index;
+export default Index;
 export const getServerSideProps = async (context) => {
   const session = await unstable_getServerSession(
     context.req,

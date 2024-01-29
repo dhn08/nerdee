@@ -9,9 +9,9 @@ import axios from "axios";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 import MainTeacher from "../../../components/layouts/MainTeacher";
-const id = () => {
+const Id = () => {
   const router = useRouter();
-  const courseId = router.query.id;
+  const courseId = router.query.Id;
 
   const [title, setTitle] = useState("");
   const [sectionNumber, setsectionNumber] = useState("");
@@ -104,7 +104,7 @@ const id = () => {
   );
 };
 
-export default id;
+export default Id;
 
 export async function getServerSideProps({ req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);

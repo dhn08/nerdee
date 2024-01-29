@@ -9,7 +9,7 @@ import WatchArea from "../../../components/courses/study/WatchArea";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 import CommentArea from "../../../components/courses/study/CommentArea";
-const course_uuid = ({ data }) => {
+const Course_uuid = ({ data }) => {
   const [comments, setComments] = useState(data.comment);
   console.log("Han bhai dara:", data);
   const [title, setTitle] = useState(data.title || []);
@@ -25,7 +25,7 @@ const course_uuid = ({ data }) => {
 export const getServerSideProps = async ({
   req,
   res,
-  query: { course_uuid },
+  query: { Course_uuid },
 }) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   if (!session) {
@@ -47,9 +47,9 @@ export const getServerSideProps = async ({
     });
 
     // console.log("userCourses", userCourses);
-    // console.log("course_uuid", course_uuid);
-    // console.log("resu:", !userCourses.includes(course_uuid));
-    if (!userCourses.includes(course_uuid)) {
+    // console.log("Course_uuid", Course_uuid);
+    // console.log("resu:", !userCourses.includes(Course_uuid));
+    if (!userCourses.includes(Course_uuid)) {
       console.log("andar hun");
       return {
         redirect: {
@@ -61,7 +61,7 @@ export const getServerSideProps = async ({
     // console.log("id:", userCourses);
     // userCourses = session.user.courses;
   }
-  const q1 = courseSectionsDetailQuery(course_uuid);
+  const q1 = courseSectionsDetailQuery(Course_uuid);
   const data = await client.fetch(q1);
   console.log("section data:", data);
   return {
@@ -69,4 +69,4 @@ export const getServerSideProps = async ({
   };
 };
 
-export default course_uuid;
+export default Course_uuid;

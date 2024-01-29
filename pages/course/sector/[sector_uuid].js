@@ -4,7 +4,7 @@ import Main from "../../../components/layouts/Main";
 import client from "../../../utils/client";
 import { sectorDetailQuery } from "../../../utils/queries";
 
-const sector_uuid = ({ sectors }) => {
+const Sector_uuid = ({ sectors }) => {
   return (
     <Main>
       <section className="py-10 px-8 ">
@@ -54,14 +54,14 @@ const sector_uuid = ({ sectors }) => {
   );
 };
 
-export default sector_uuid;
+export default Sector_uuid;
 
-export async function getServerSideProps({ query: { sector_uuid } }) {
-  const q1 = sectorDetailQuery(sector_uuid);
+export async function getServerSideProps({ query: { Sector_uuid } }) {
+  const q1 = sectorDetailQuery(Sector_uuid);
   const sectors = await client.fetch(q1);
   // const sectors = [
   //   {
-  //     sector_uuid: 1,
+  //     Sector_uuid: 1,
   //     sector_name: "Python",
   //     sector_image:
   //       "https://res.cloudinary.com/dplljbrim/image/upload/v1663528167/neerdee/pexels-christina-morillo-1181671_zkbwz9_m9myeo.jpg",
@@ -81,7 +81,7 @@ export async function getServerSideProps({ query: { sector_uuid } }) {
   //   },
 
   //   {
-  //     sector_uuid: 2,
+  //     Sector_uuid: 2,
   //     sector_name: "Javascript",
   //     sector_image:
   //       "https://res.cloudinary.com/dplljbrim/image/upload/v1663528167/neerdee/pexels-jorge-jesus-614117_mu3ukg_ynobni.jpg",
@@ -100,7 +100,7 @@ export async function getServerSideProps({ query: { sector_uuid } }) {
   //     ],
   //   },
   //   {
-  //     sector_uuid: 3,
+  //     Sector_uuid: 3,
   //     sector_name: "Machine Learning",
   //     sector_image:
   //       "https://res.cloudinary.com/dplljbrim/image/upload/v1663528167/neerdee/pexels-kindel-media-8566473_gpfxc8_z9e0yf.jpg",
@@ -119,7 +119,7 @@ export async function getServerSideProps({ query: { sector_uuid } }) {
   //     ],
   //   },
   // ];
-  // const data = sectors.find((sector) => sector.sector_uuid == sector_uuid);
+  // const data = sectors.find((sector) => sector.Sector_uuid == Sector_uuid);
 
   return {
     props: { sectors }, // will be passed to the page component as props

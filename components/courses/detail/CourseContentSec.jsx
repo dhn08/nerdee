@@ -13,7 +13,7 @@ const CourseContentSec = ({ section }) => {
     setHidden(!hidden);
   };
   let total_length = 0;
-  section.episodes.map((ep) => (total_length += ep.duration));
+  section?.episodes?.map((ep) => (total_length += ep.duration));
   return (
     <div>
       <div
@@ -30,15 +30,15 @@ const CourseContentSec = ({ section }) => {
           </div>
           <div>
             <h3 className="md:text-lg font-semibold">
-              {section.section_title}
+              {section?.section_title}
             </h3>
           </div>
         </div>
         <div className="w-4/12 md:w-3/12 lg:w-4/12">
           <ul className="flex text-xs md:text-base">
             <li className="mr-1">
-              {section.episodes.length} lecture
-              {section.episodes.length > 1 && "s"}
+              {section?.episodes?.length} lecture
+              {section?.episodes?.length > 1 && "s"}
             </li>
             <li>• {formatTime(total_length)}</li>
           </ul>

@@ -11,7 +11,7 @@ import { findUserQuery } from "../../../utils/queries";
 import CourseDetail from "../../../components/courses/detail/CourseDetail";
 import Feedback from "../../../components/courses/detail/Feedback";
 
-const course_uuid = ({ courses, userCourses }) => {
+const Course_uuid = ({ courses, userCourses }) => {
   return (
     <Main>
       <Banner data={courses} userCourses={userCourses} />
@@ -23,9 +23,9 @@ const course_uuid = ({ courses, userCourses }) => {
   );
 };
 
-export default course_uuid;
-export async function getServerSideProps({ query: { course_uuid }, res, req }) {
-  const q1 = courseDetailQuery(course_uuid);
+export default Course_uuid;
+export async function getServerSideProps({ query: { Course_uuid }, res, req }) {
+  const q1 = courseDetailQuery(Course_uuid);
   const courses = await client.fetch(q1);
 
   //Insuring fresh data for user after checkout as course array in user is updated.

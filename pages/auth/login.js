@@ -8,7 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,7 +68,7 @@ const login = () => {
             <p className="md:text-lg my-2 text-center ">
               Do not have an account?{" "}
               <span className="text-blue-600 font-medium">
-                <Link href="/auth/signup">Sign Up</Link>
+                <Link href="/auth/Signup">Sign Up</Link>
               </span>
             </p>
           </form>
@@ -78,4 +78,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

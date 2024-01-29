@@ -15,6 +15,7 @@ function CartIndex() {
   // const [cartSize,setCartSize]=useState(0)
   const { data } = useSession();
   const { cart, removeCart, clearCart } = useContext(CartContext);
+
   const [cartTotal, setCartTotal] = useState();
   const [cartReady, setCartReady] = useState(false);
   const [requestingPayment, setRequestingPayment] = useState(false);
@@ -30,7 +31,7 @@ function CartIndex() {
         console.log("indise if");
         setRequestingPayment(false);
         toast.error("Please login to proceed!!");
-        router.push("/auth/login");
+        router.push("/auth/Login");
         return;
       }
 
@@ -84,15 +85,16 @@ function CartIndex() {
           `${process.env.HOST}/api/course/cart`,
           payload
         );
-        // console.log("initial data", data);
-        // console.log("cart total", data.cart_total);
-        // console.log("cart details", data.cartDetails);
+        console.log("initial data", data);
+        console.log("cart total", data.cart_total);
+        console.log("cart details", data.cartDetails);
 
         setCartTotal(data.cart_total);
         setCartDetails(data.cartDetails);
         setCartReady(true);
       }
     }
+
     fetchData();
   }, [cart]);
 

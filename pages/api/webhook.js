@@ -22,7 +22,7 @@ const fulfillOrder = async (session) => {
   // console.log("result", result);
   return result;
 };
-export default async (req, res) => {
+const handleWebhook = async (req, res) => {
   if (req.method == "POST") {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
@@ -45,6 +45,7 @@ export default async (req, res) => {
     }
   }
 };
+export default handleWebhook;
 export const config = {
   api: {
     bodyParser: false,

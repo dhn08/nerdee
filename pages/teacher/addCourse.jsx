@@ -17,7 +17,7 @@ import axios from "axios";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import MainTeacher from "../../components/layouts/MainTeacher";
-const addCourse = ({ sectors, user }) => {
+const AddCourse = ({ sectors, user }) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -143,7 +143,7 @@ const addCourse = ({ sectors, user }) => {
   );
 };
 
-export default addCourse;
+export default AddCourse;
 
 export async function getServerSideProps({ req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);

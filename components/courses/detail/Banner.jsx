@@ -11,19 +11,19 @@ const Banner = ({ data, userCourses: courses }) => {
   const router = useRouter();
   // const { data: user } = useSession();
 
-  const { course_uuid } = router.query;
+  const { Course_uuid } = router.query;
   const handleCarting = () => {
-    if (cart.includes(course_uuid)) {
-      removeCart(course_uuid);
+    if (cart.includes(Course_uuid)) {
+      removeCart(Course_uuid);
     } else {
-      addCart(course_uuid);
+      addCart(Course_uuid);
     }
   };
 
   // console.log("Han bhai ye raha:", courses);
   // console.log(
   //   courses.findIndex((e) => {
-  //     return e._id.toString() === course_uuid.toString();
+  //     return e._id.toString() === Course_uuid.toString();
   //   })
   // );
   return (
@@ -53,25 +53,25 @@ const Banner = ({ data, userCourses: courses }) => {
       </p>
       <h2 className="text-xl md:text-2xl font-semibold mb-2">₹{data.price}</h2>
       {/* <button onClick={handleCarting} className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
-                    {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart" }
+                    {cart.includes(Course_uuid) ? "Remove from cart" : "Add to cart" }
                 </button> */}
       {/* <button
         onClick={handleCarting}
         className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
       >
-        {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
+        {cart.includes(Course_uuid) ? "Remove from cart" : "Add to cart"}
       </button> */}
       {courses?.findIndex((e) => {
-        return e === course_uuid;
+        return e === Course_uuid;
       }) === -1 ? (
         <button
           onClick={handleCarting}
           className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
         >
-          {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
+          {cart.includes(Course_uuid) ? "Remove from cart" : "Add to cart"}
         </button>
       ) : (
-        <Link href={"/course/study/" + course_uuid}>
+        <Link href={"/course/study/" + Course_uuid}>
           <button className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
             Start Learning
           </button>

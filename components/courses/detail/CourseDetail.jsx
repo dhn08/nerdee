@@ -5,8 +5,8 @@ const CourseDetail = ({ sections }) => {
   let total_lectures = 0;
   let total_length = 0;
   sections?.map((section) => {
-    total_lectures += section.episodes.length;
-    section.episodes.map((ep) => (total_length += ep.duration));
+    total_lectures += section.episodes?.length;
+    section.episodes?.map((ep) => (total_length += ep.duration));
   });
   return (
     <section className="w-full flex justify-center py-10">

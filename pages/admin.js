@@ -25,7 +25,7 @@ import { unstable_getServerSession } from "next-auth";
 //     password: "Asasa",
 //   },
 // ];
-const admin = ({ userData }) => {
+const Admin = ({ userData }) => {
   return (
     <Main>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 ml-5">
@@ -39,13 +39,14 @@ const admin = ({ userData }) => {
   );
 };
 
-export default admin;
+export default Admin;
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(
     context.req,
     context.res,
     authOptions
   );
+  console.log("Admin se ", session);
   if (!session || session.user?.role !== "Admin") {
     return {
       redirect: {

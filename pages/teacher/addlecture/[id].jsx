@@ -14,9 +14,9 @@ import Link from "next/link";
 import VideoInput from "../../../components/auth/VideoInput";
 import { toast } from "react-toastify";
 import axios from "axios";
-const id = ({ course_sections }) => {
+const Id = ({ course_sections }) => {
   const router = useRouter();
-  const courseId = router.query.id;
+  const courseId = router.query.Id;
   const [title, setTitle] = useState("");
   const [selectedOption, setselectedOption] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -161,10 +161,10 @@ const id = ({ course_sections }) => {
   );
 };
 
-export default id;
+export default Id;
 export async function getServerSideProps({ query, req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);
-  const courseId = query.id;
+  const courseId = query.Id;
   if (!session) {
     return {
       redirect: {
