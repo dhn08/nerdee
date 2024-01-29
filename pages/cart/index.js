@@ -81,12 +81,12 @@ function CartIndex() {
         const payload = { ids: cart };
 
         const { data } = await axios.post(
-          "http://localhost:3000/api/course/cart",
+          `${process.env.HOST}/api/course/cart`,
           payload
         );
-        console.log("initial data", data);
-        console.log("cart total", data.cart_total);
-        console.log("cart details", data.cartDetails);
+        // console.log("initial data", data);
+        // console.log("cart total", data.cart_total);
+        // console.log("cart details", data.cartDetails);
 
         setCartTotal(data.cart_total);
         setCartDetails(data.cartDetails);

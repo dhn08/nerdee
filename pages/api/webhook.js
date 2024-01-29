@@ -7,14 +7,18 @@ const fulfillOrder = async (session) => {
   console.log("Inside fullfill order");
   console.log("cart:", cart);
   console.log("userId:", userId);
-
-  const result = await axios.post(
-    "http://localhost:3000/api/addcoursestudent",
-    {
-      courseIds: JSON.parse(cart),
-      userId,
-    }
-  );
+  // const result = await axios.post(
+  //   "http://localhost:3000/api/addcoursestudent",
+  //   {
+  //     courseIds: JSON.parse(cart),
+  //     userId,
+  //   }
+  // );
+  // console.log("Insied fulFill order :", process.env.HOST);
+  const result = await axios.post(`${process.env.HOST}/api/addcoursestudent`, {
+    courseIds: JSON.parse(cart),
+    userId,
+  });
   // console.log("result", result);
   return result;
 };
@@ -34,7 +38,7 @@ export default async (req, res) => {
     //handle the spech checkout.session.complete event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      // console.log("han bhai");
+      console.log("han bhai");
       return fulfillOrder(session)
         .then(() => res.status(200))
         .catch((err) => res.status(400).send(`Webhook erro:`, err.message));

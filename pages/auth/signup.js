@@ -22,7 +22,12 @@ const signup = () => {
       email: email,
       password: password,
     };
-    const result = await axios.post("http://localhost:3000/api/signup", doc);
+    console.log("Console se :", process.env.HOST);
+    // const result = await axios.post("http://localhost:3000/api/signup", doc);
+    const result = await axios.post(`${process.env.HOST}/api/signup`, doc);
+
+    // const result = await axios.post("api/signup", doc);
+
     console.log(result);
     toast(`${result.data}`);
     setName("");

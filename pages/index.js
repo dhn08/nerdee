@@ -104,7 +104,8 @@ import { unstable_getServerSession } from "next-auth";
 
 export default function Home({ courses, sectors }) {
   const { data } = useSession();
-  console.log(data);
+  // console.log(data);
+
   return (
     <div>
       <Head>

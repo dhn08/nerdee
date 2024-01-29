@@ -19,8 +19,12 @@ const signupTeacher = () => {
       email: email,
       password: password,
     };
+    // const result = await axios.post(
+    //   "http://localhost:3000/api/teacherregister",
+    //   doc
+    // );
     const result = await axios.post(
-      "http://localhost:3000/api/teacherregister",
+      `${process.env.HOST}/api/teacherregister`,
       doc
     );
     toast(`${result.data}`);
