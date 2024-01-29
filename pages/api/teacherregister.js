@@ -11,13 +11,20 @@ const transporter = nodemailer.createTransport({
   },
   service: process.env.SMPT_SERVICE,
 });
+// const mailOptions = {
+//   from: "btech19eskcs070@skit.ac.in",
+//   to: "singhdhananjay.2001@gmail.com",
+//   subject: "New Request for register",
+//   text: "There is new request for teacher registration",
+// };
 const mailOptions = {
-  from: "btech19eskcs070@skit.ac.in",
-  to: "singhdhananjay.2001@gmail.com",
+  from: process.env.SMPT_MAIL,
+  to: process.env.ADMIN_MAIL,
   subject: "New Request for register",
   text: "There is new request for teacher registration",
 };
 export default async function handler(req, res) {
+  console.log("mailOptions:", mailOptions);
   if (req.method === "POST") {
     try {
       const { _type, name, email, password } = req.body;
