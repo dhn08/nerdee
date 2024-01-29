@@ -50,7 +50,7 @@ const Navbar = () => {
         />
       </form>
       <div className="w-3/12 flex items-center md:w-2/12 justify-center lg:justify-between">
-        <Link className="hidden lg:block" href="/auth/SignupTeacher">
+        <Link className="hidden lg:block" href="/auth/signupTeacher">
           Teach on Nerdee
         </Link>
 

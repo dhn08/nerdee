@@ -25,7 +25,7 @@ const Course_uuid = ({ data }) => {
 export const getServerSideProps = async ({
   req,
   res,
-  query: { Course_uuid },
+  query: { course_uuid },
 }) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   if (!session) {
@@ -49,7 +49,7 @@ export const getServerSideProps = async ({
     // console.log("userCourses", userCourses);
     // console.log("Course_uuid", Course_uuid);
     // console.log("resu:", !userCourses.includes(Course_uuid));
-    if (!userCourses.includes(Course_uuid)) {
+    if (!userCourses.includes(course_uuid)) {
       console.log("andar hun");
       return {
         redirect: {
@@ -61,7 +61,7 @@ export const getServerSideProps = async ({
     // console.log("id:", userCourses);
     // userCourses = session.user.courses;
   }
-  const q1 = courseSectionsDetailQuery(Course_uuid);
+  const q1 = courseSectionsDetailQuery(course_uuid);
   const data = await client.fetch(q1);
   console.log("section data:", data);
   return {

@@ -24,8 +24,8 @@ const Course_uuid = ({ courses, userCourses }) => {
 };
 
 export default Course_uuid;
-export async function getServerSideProps({ query: { Course_uuid }, res, req }) {
-  const q1 = courseDetailQuery(Course_uuid);
+export async function getServerSideProps({ query: { course_uuid }, res, req }) {
+  const q1 = courseDetailQuery(course_uuid);
   const courses = await client.fetch(q1);
 
   //Insuring fresh data for user after checkout as course array in user is updated.

@@ -56,8 +56,8 @@ const Sector_uuid = ({ sectors }) => {
 
 export default Sector_uuid;
 
-export async function getServerSideProps({ query: { Sector_uuid } }) {
-  const q1 = sectorDetailQuery(Sector_uuid);
+export async function getServerSideProps({ query: { sector_uuid } }) {
+  const q1 = sectorDetailQuery(sector_uuid);
   const sectors = await client.fetch(q1);
   // const sectors = [
   //   {
