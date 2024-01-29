@@ -27,6 +27,8 @@ export const authOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+
   //Stack overflow solution
   //If no callback used.. useSession resturn user object with only name and email... we required role also.
   callbacks: {
