@@ -11,12 +11,12 @@ const Banner = ({ data, userCourses: courses }) => {
   const router = useRouter();
   // const { data: user } = useSession();
 
-  const { Course_uuid } = router.query;
+  const { course_uuid } = router.query;
   const handleCarting = () => {
-    if (cart.includes(Course_uuid)) {
-      removeCart(Course_uuid);
+    if (cart.includes(course_uuid)) {
+      removeCart(course_uuid);
     } else {
-      addCart(Course_uuid);
+      addCart(course_uuid);
     }
   };
 
@@ -62,16 +62,16 @@ const Banner = ({ data, userCourses: courses }) => {
         {cart.includes(Course_uuid) ? "Remove from cart" : "Add to cart"}
       </button> */}
       {courses?.findIndex((e) => {
-        return e === Course_uuid;
+        return e === course_uuid;
       }) === -1 ? (
         <button
           onClick={handleCarting}
           className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white"
         >
-          {cart.includes(Course_uuid) ? "Remove from cart" : "Add to cart"}
+          {cart.includes(course_uuid) ? "Remove from cart" : "Add to cart"}
         </button>
       ) : (
-        <Link href={"/course/study/" + Course_uuid}>
+        <Link href={"/course/study/" + course_uuid}>
           <button className="py-2 rounded-md px-5 bg-blue-500 font-semibold  text-white">
             Start Learning
           </button>
