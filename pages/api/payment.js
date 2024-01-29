@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     payment_method_types: ["card"],
     line_items: transformedItems,
     mode: "payment",
-    success_url: `${process.env.HOST}/Success`,
+    success_url: `${process.env.HOST}/success`,
     cancel_url: `${process.env.HOST}/cart`,
     metadata: {
       userId,
