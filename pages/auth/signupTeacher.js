@@ -84,7 +84,7 @@ const SignupTeacher = () => {
             <p className="md:text-lg my-2 text-center ">
               Already have an account?{" "}
               <span className="text-blue-600 font-medium">
-                <Link href="/auth/Login">Log In</Link>
+                <Link href="/auth/login">Log In</Link>
               </span>
             </p>
           </form>

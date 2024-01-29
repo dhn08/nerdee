@@ -68,7 +68,7 @@ const Login = () => {
             <p className="md:text-lg my-2 text-center ">
               Do not have an account?{" "}
               <span className="text-blue-600 font-medium">
-                <Link href="/auth/Signup">Sign Up</Link>
+                <Link href="/auth/signup">Sign Up</Link>
               </span>
             </p>
           </form>

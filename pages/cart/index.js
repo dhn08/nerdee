@@ -31,7 +31,7 @@ function CartIndex() {
         console.log("indise if");
         setRequestingPayment(false);
         toast.error("Please login to proceed!!");
-        router.push("/auth/Login");
+        router.push("/auth/login");
         return;
       }
 

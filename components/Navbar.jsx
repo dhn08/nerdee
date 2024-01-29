@@ -85,13 +85,13 @@ const Navbar = () => {
           <>
             {" "}
             <button
-              onClick={() => pushRoute("/auth/Login")}
+              onClick={() => pushRoute("/auth/login")}
               className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border border-blue-500 font-semibold text-blue-500  bg-white "
             >
               Log In
             </button>
             <button
-              onClick={() => pushRoute("/auth/Signup")}
+              onClick={() => pushRoute("/auth/signup")}
               className="text-sm py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-500 font-semibold text-white"
             >
               Sign Up
