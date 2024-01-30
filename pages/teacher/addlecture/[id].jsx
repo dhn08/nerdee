@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 const Id = ({ course_sections }) => {
   const router = useRouter();
-  const courseId = router.query.Id;
+  const courseId = router.query.id;
   const [title, setTitle] = useState("");
   const [selectedOption, setselectedOption] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);

@@ -11,7 +11,7 @@ import { authOptions } from "../../api/auth/[...nextauth]";
 import MainTeacher from "../../../components/layouts/MainTeacher";
 const Id = () => {
   const router = useRouter();
-  const courseId = router.query.Id;
+  const courseId = router.query.id;
 
   const [title, setTitle] = useState("");
   const [sectionNumber, setsectionNumber] = useState("");
