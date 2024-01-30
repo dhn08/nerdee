@@ -25,31 +25,32 @@ export default async function handler(req, res) {
       // });
 
       //Trying promise All
-      // await Promise.all(
-      //   courseIds.map(async (id) => {
-      //     console.log("Insde promise :", id);
-      //     await client
-      //       .patch(userId)
-      //       .setIfMissing({ courses: [] })
-      //       .insert("after", "courses[-1]", [{ _type: "reference", _ref: id }])
-      //       .commit({
-      //         autoGenerateArrayKeys: true,
-      //       });
-      //   })
-      // );
-      //chatgot sol
-      await client
-        .patch(userId)
-        .setIfMissing({ courses: [] })
-        .set({
-          courses: (currentCourses) => [
-            ...(currentCourses || []),
-            ...courseIds.map((id) => ({ _type: "reference", _ref: id })),
-          ],
+      await Promise.all(
+        courseIds.map(async (id) => {
+          console.log("Insde promise :", id);
+          await client
+            .patch(userId)
+            .setIfMissing({ courses: [] })
+            .insert("after", "courses[-1]", [{ _type: "reference", _ref: id }])
+            .commit({
+              autoGenerateArrayKeys: true,
+            });
         })
-        .commit({
-          autoGenerateArrayKeys: true,
-        });
+      );
+      //chatgot sol
+      // await client
+      //   .patch(userId)
+      //   .setIfMissing({ courses: [] })
+      //   .set({
+      //     courses: (currentCourses) => [
+      //       ...(currentCourses || []),
+      //       ...courseIds.map((id) => ({ _type: "reference", _ref: id })),
+      //     ],
+      //   })
+      //   .commit({
+      //     autoGenerateArrayKeys: true,
+      //   });
+      console.log("New Course added from api");
       res.status(200).json("course added");
     } catch (error) {
       res.status(200).json({ msg: error.message });
