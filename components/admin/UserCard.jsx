@@ -15,7 +15,7 @@ const UserCard = ({ userData }) => {
       password: userData.password,
     };
     const result = await axios.post(
-      "http://localhost:3000/api/adminapprove",
+      `${process.env.HOST}/api/adminapprove`,
       doc
     );
     router.push("/admin");
@@ -24,7 +24,7 @@ const UserCard = ({ userData }) => {
   };
   const handleReject = async () => {
     const result = await axios.post(
-      "http://localhost:3000/api/adminreject",
+      `${process.env.HOST}/api/adminreject`,
       userData
     );
     router.push("/admin");

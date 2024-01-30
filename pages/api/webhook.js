@@ -15,6 +15,7 @@ const fulfillOrder = async (session) => {
   //   }
   // );
   // console.log("Insied fulFill order :", process.env.HOST);
+  // console.log("Han bhai fulfill");
   const result = await axios.post(
     `${process.env.HOST}/api/addcoursestudent`,
     {
@@ -42,7 +43,7 @@ const handleWebhook = async (req, res) => {
     //handle the spech checkout.session.complete event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      console.log("han bhai");
+      // console.log("han bhai");
       return fulfillOrder(session)
         .then(() => res.status(200))
         .catch((err) => res.status(400).send(`Webhook erro:`, err.message));
