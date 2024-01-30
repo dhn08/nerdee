@@ -19,7 +19,7 @@ const Index = ({ courseDetail }) => {
         </h2>
         <div className="w-1/2">
           <button
-            onClick={() => router.push("/teacher/AddCourse")}
+            onClick={() => router.push("/teacher/addCourse")}
             className="text-sm  py-1 px-2 lg:text-base  lg:py-2 rounded-md md:px-5 border bg-blue-400  font-semibold text-white"
           >
             Add Course
