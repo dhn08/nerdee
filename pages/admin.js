@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
-  console.log("Admin se ", session);
+  // console.log("Admin se ", session);
   if (!session || session.user?.role !== "Admin") {
     return {
       redirect: {
