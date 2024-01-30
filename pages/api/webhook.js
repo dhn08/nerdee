@@ -4,9 +4,9 @@ import { buffer } from "micro";
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 const fulfillOrder = async (session) => {
   const { cart, userId } = session.metadata;
-  // console.log("Inside fullfill order");
-  // console.log("cart:", cart);
-  // console.log("userId:", userId);
+  console.log("Inside fullfill order");
+  console.log("cart:", cart);
+  console.log("userId:", userId);
   // const result = await axios.post(
   //   "http://localhost:3000/api/addcoursestudent",
   //   {
