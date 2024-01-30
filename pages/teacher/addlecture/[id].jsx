@@ -164,7 +164,7 @@ const Id = ({ course_sections }) => {
 export default Id;
 export async function getServerSideProps({ query, req, res }) {
   const session = await unstable_getServerSession(req, res, authOptions);
-  const courseId = query.Id;
+  const courseId = query.id;
   if (!session) {
     return {
       redirect: {
