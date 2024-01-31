@@ -57,10 +57,18 @@ const fulfillOrder = (session) => {
   console.log("Inside fullfill order");
   console.log("cart:", cart);
   console.log("userId:", userId);
-  axios.post(`${process.env.HOST}/api/addcoursestudent`, {
-    courseIds: JSON.parse(cart),
-    userId,
-  });
+  axios.post(
+    `${process.env.HOST}/api/addcoursestudent`,
+    {
+      courseIds: JSON.parse(cart),
+      userId,
+    },
+    {
+      headers: {
+        "x-webhook-secret": process.env.STRIPE_SECRET_KEY, // Include the shared secret as a header
+      },
+    }
+  );
   // console.log("result", result);
 };
 

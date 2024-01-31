@@ -1,7 +1,11 @@
 import client from "../../utils/client";
 export default async function handler(req, res) {
   const { courseIds, userId } = req.body;
+  const webhookSecret = req.headers["x-webhook-secret"];
   console.log("Inside api :", courseIds);
+  if (webhookSecret !== process.env.STRIPE_SECRET_KEY) {
+    return res.status(403).json({ msg: "Unauthorized" });
+  }
   if (req.method === "POST") {
     try {
       // console.log("Han bhai inside add api");
