@@ -109,15 +109,13 @@ const handleWebhook = async (req, res) => {
 
       try {
         fulfillOrder(session);
-        return res.status(200);
+        return res.status(200).end();
       } catch (error) {
         console.error("Error fulfilling order:", error);
 
         // If the error is due to a gateway timeout, return a response with a status code indicating no further retries
-        if (error instanceof GatewayTimeoutError) {
-          return res
-            .status(503)
-            .send(`Webhook processing failed: ${error.message}`);
+        if (error.statusCode === 504) {
+          return res.status(200).end();
         } else {
           return res
             .status(500)
