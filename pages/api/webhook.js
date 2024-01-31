@@ -63,6 +63,32 @@ const fulfillOrder = (session) => {
   });
   // console.log("result", result);
 };
+
+//currectly working
+// const handleWebhook = async (req, res) => {
+//   if (req.method == "POST") {
+//     const requestBuffer = await buffer(req);
+//     const payload = requestBuffer.toString();
+//     const sig = req.headers["stripe-signature"];
+//     let event;
+//     //verify event comes from stripe
+//     try {
+//       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+//     } catch (error) {
+//       console.log("Error", error.message);
+//       return res.status(400).send(`Webhook error:${error.message}`);
+//     }
+//     //handle the spech checkout.session.complete event
+//     if (event.type === "checkout.session.completed") {
+//       const session = event.data.object;
+//       // console.log("han bhai");
+//       fulfillOrder(session);
+//       return res.status(200);
+//     }
+//   }
+// };
+
+//using try catch
 const handleWebhook = async (req, res) => {
   if (req.method == "POST") {
     const requestBuffer = await buffer(req);
@@ -80,8 +106,24 @@ const handleWebhook = async (req, res) => {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
       // console.log("han bhai");
-      fulfillOrder(session);
-      return res.status(200);
+
+      try {
+        fulfillOrder(session);
+        return res.status(200);
+      } catch (error) {
+        console.error("Error fulfilling order:", error);
+
+        // If the error is due to a gateway timeout, return a response with a status code indicating no further retries
+        if (error instanceof GatewayTimeoutError) {
+          return res
+            .status(503)
+            .send(`Webhook processing failed: ${error.message}`);
+        } else {
+          return res
+            .status(500)
+            .send(`Webhook processing failed: ${error.message}`);
+        }
+      }
     }
   }
 };
