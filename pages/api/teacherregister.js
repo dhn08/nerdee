@@ -6,10 +6,10 @@ const transporter = nodemailer.createTransport({
   port: process.env.SMPT_PORT,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.SMPT_MAIL, // generated ethereal user
+    user: process.env.SMPT_USER, // generated ethereal user
     pass: process.env.SMPT_PASSWORD, // generated ethereal password
   },
-  service: process.env.SMPT_SERVICE,
+  // service: process.env.SMPT_SERVICE,
 });
 // const mailOptions = {
 //   from: "btech19eskcs070@skit.ac.in",
@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 //   text: "There is new request for teacher registration",
 // };
 const mailOptions = {
-  from: process.env.SMPT_MAIL,
+  from: process.env.SMPT_USER,
   to: process.env.ADMIN_MAIL,
   subject: "New Request for register",
   text: "There is new request for teacher registration",

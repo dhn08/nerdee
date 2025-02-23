@@ -5,10 +5,10 @@ const transporter = nodemailer.createTransport({
   port: process.env.SMPT_PORT,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.SMPT_MAIL, // generated ethereal user
+    user: process.env.SMPT_USER, // generated ethereal user
     pass: process.env.SMPT_PASSWORD, // generated ethereal password
   },
-  service: process.env.SMPT_SERVICE,
+  // service: process.env.SMPT_SERVICE,
   //   service: "gmail",
   //   auth: {
   //     user: "btech19eskcs070@skit.ac.in",
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         role: "Teacher",
       };
       const mailOptions = {
-        from: "btech19eskcs070@skit.ac.in",
+        from: process.env.SMPT_USER,
         to: `${newDocument.email}`,
         subject: "Approved by admin",
         text: "Congratulation you are approved by admin",
